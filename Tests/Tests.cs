@@ -20,6 +20,25 @@ namespace Tests
             client.BaseAddress = new Uri("http://localhost:13694/");
         }
 
+        public void StartTestJustOne() {
+            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}";
+
+            SBAzureSettings config = new SBAzureSettings("turizem", "q", "192.168.0.123", "biroside", false, "biroside");
+            CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
+            BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
+            SPlacilo placilo = biro.retrieveValidationRecordsKnjigaPoste(5)[4];
+
+            string database = "biro16010264";
+            string company_id = "who";
+            string company_year = "cares";
+            string oznaka = placilo.slika.oznaka;
+            string recno = placilo.slika.recno;
+
+            query = string.Format(query, database, company_id, company_year, oznaka, recno);
+
+            HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
+        }
+
         public void StartTest() {
             string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
 
