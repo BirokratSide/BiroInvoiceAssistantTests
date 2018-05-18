@@ -1,0 +1,14 @@
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.deps.json
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.json
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.dev.json
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.dll
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.pdb
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Common.dll
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Common.pdb
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csprojResolveAssemblyReference.cache
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CoreCompileInputs.cache
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfoInputs.cache
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfo.cs
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CopyComplete
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.dll
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.pdb

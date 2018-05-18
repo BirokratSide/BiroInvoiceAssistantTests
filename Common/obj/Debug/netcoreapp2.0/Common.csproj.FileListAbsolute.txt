@@ -1,0 +1,9 @@
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\bin\Debug\netcoreapp2.0\Common.deps.json
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\bin\Debug\netcoreapp2.0\Common.dll
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\bin\Debug\netcoreapp2.0\Common.pdb
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.csprojResolveAssemblyReference.cache
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.csproj.CoreCompileInputs.cache
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfoInputs.cache
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfo.cs
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.dll
+c:\users\kristijan\source\repos\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.pdb
