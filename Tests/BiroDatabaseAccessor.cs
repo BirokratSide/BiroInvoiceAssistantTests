@@ -64,7 +64,7 @@ namespace SystemTests
             SL.[Oznaka] as SlikaOznaka, 
             SL.[RecNo] as SlikaRecNo, 
             SL.[Vrsta] as SlikaVrsta,
-            SL.[Vsebina] as SlikaVsebina
+            SL.[Vsebina] as SlikaVsebina,
             SL.[DatumVnosa] as SlikaDatumVnosa
 
             FROM [biro16010264].[dbo].[Slike] SL
@@ -94,7 +94,7 @@ namespace SystemTests
             SL.[Vrsta] as SlikaVrsta,
             PL.[VDobroRacuna],
             PL.[NamenNakazila1],
-            SL.[DatumVnosa] as SlikaDatumVnosa,
+            SL.[DatumVnosa] as SlikaDatumVnosa
 
             FROM [biro16010264].[dbo].[Placila] PL, [biro16010264].[dbo].[Slike] SL, [biro16010264].[dbo].[Partner] PA
 
