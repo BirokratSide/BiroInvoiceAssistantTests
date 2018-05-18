@@ -93,7 +93,8 @@ namespace SystemTests
             SL.[RecNo] as SlikaRecNo, 
             SL.[Vrsta] as SlikaVrsta,
             PL.[VDobroRacuna],
-            PL.[NamenNakazila1]
+            PL.[NamenNakazila1],
+            SL.[DatumVnosa] as SlikaDatumVnosa,
 
             FROM [biro16010264].[dbo].[Placila] PL, [biro16010264].[dbo].[Slike] SL, [biro16010264].[dbo].[Partner] PA
 

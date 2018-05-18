@@ -2156,11 +2156,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\Tests.csproj",
       "projectName": "Tests",
-      "projectPath": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\Tests.csproj",
+      "projectPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\Tests.csproj",
       "packagesPath": "C:\\Users\\Kristijan\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\obj\\",
+      "outputPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -2179,8 +2179,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj": {
-              "projectPath": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj"
+            "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj": {
+              "projectPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj"
             }
           }
         }

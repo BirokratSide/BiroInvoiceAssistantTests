@@ -2100,11 +2100,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
+      "projectUniqueName": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
+      "projectPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
       "packagesPath": "C:\\Users\\Kristijan\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\obj\\",
+      "outputPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

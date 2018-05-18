@@ -38,7 +38,7 @@ namespace SystemTests
                 pay_until = f(4);
                 referencepart1 = f(5);
                 referencepart2 = f(6);
-                slika = new SSlika(f(8), f(9), f(10), f(7));
+                slika = new SSlika(f(8), f(9), f(10), f(7), f(13));
                 VDobroRacuna = f(11);
                 NamenNakazila = f(12);
             }
@@ -47,7 +47,7 @@ namespace SystemTests
             {
                 SPlacilo placilo = new SPlacilo();
                 Func<int, string> f = delegate (int idx) { return GConv.DbToStr(data[idx]); };
-                placilo.slika = new SSlika(f(0), f(1), f(2), f(3));
+                placilo.slika = new SSlika(f(0), f(1), f(2), f(3), f(4));
                 return placilo;
             }
         }
@@ -58,14 +58,16 @@ namespace SystemTests
             public string oznaka;
             public string recno;
             public string vrsta;
+            public string datum_vnosa;
             public string vsebina;
 
-            public SSlika(string oznaka, string recno, string vrsta, string vsebina)
+            public SSlika(string oznaka, string recno, string vrsta, string vsebina, string datum_vnosa)
             {
                 this.oznaka = oznaka;
                 this.recno = recno;
                 this.vrsta = vrsta;
                 this.vsebina = vsebina;
+                this.datum_vnosa = datum_vnosa;
             }
        }
 }
