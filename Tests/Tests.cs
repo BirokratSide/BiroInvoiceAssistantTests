@@ -21,7 +21,7 @@ namespace Tests
         }
 
         public void StartTestJustOne() {
-            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}";
+            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
 
             SBAzureSettings config = new SBAzureSettings("turizem", "q", "192.168.0.123", "biroside", false, "biroside");
             CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
@@ -33,8 +33,9 @@ namespace Tests
             string company_year = "cares";
             string oznaka = placilo.slika.oznaka;
             string recno = placilo.slika.recno;
+            string datum_vnosa = placilo.slika.datum_vnosa;
 
-            query = string.Format(query, database, company_id, company_year, oznaka, recno);
+            query = string.Format(query, database, company_id, company_year, oznaka, recno, datum_vnosa);
 
             HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
         }

@@ -59,23 +59,7 @@ namespace SystemTests
             private string getValidationRecordsKnjigaPosteSqlString()
             {
                 string query = @"
-            SELECT TOP({0}) 
-
-            SL.[Oznaka] as SlikaOznaka, 
-            SL.[RecNo] as SlikaRecNo, 
-            SL.[Vrsta] as SlikaVrsta,
-            SL.[Vsebina] as SlikaVsebina,
-            SL.[DatumVnosa] as SlikaDatumVnosa
-
-            FROM [biro16010264].[dbo].[Slike] SL
-
-            WHERE SL.[Vrsta] like '%Pošta%'
-
-            ORDER BY SL.[Oznaka], SL.[RecNo]";
-                return query;
-
-            /*string query = @"
-                    use [biro16010264]
+            use [biro16010264]
                     SELECT TOP({0}) 
 
                     Slike.[Oznaka] as SlikaOznaka, 
@@ -85,9 +69,10 @@ namespace SystemTests
                     Slike.[DatumVnosa] as SlikaDatumVnosa
             
                     from [Slike], [PostnaKnjiga]
-                    where [Slike].[Vrsta] like '%Pošta%'
-                    and [Slike].[DatumVnosa] = [PostnaKnjiga].[DatumVnosa]
-                ";*/
+                    where [Slike].[Vrsta] = 'Pošta'
+                    and [Slike].[DatumVnosa] = [PostnaKnjiga].[DatumVnosa]";
+                return query;
+            
         }
 
         private string getValidationRecordsPlacilaSqlString()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 
 using Common.utils;
 
@@ -11,7 +12,11 @@ namespace SystemTests
         {
             Tests.Tests tes = new Tests.Tests();
 
-            tes.StartTest();
+            tes.StartTestJustOne();
+
+            Thread.Sleep(15000);
+
+            tes.GetNextInvoiceTest();
         }
     }
 }
