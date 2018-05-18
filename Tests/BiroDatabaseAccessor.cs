@@ -73,9 +73,24 @@ namespace SystemTests
 
             ORDER BY SL.[Oznaka], SL.[RecNo]";
                 return query;
-            }
 
-            private string getValidationRecordsPlacilaSqlString()
+            /*string query = @"
+                    use [biro16010264]
+                    SELECT TOP({0}) 
+
+                    Slike.[Oznaka] as SlikaOznaka, 
+                    Slike.[RecNo] as SlikaRecNo, 
+                    Slike.[Vrsta] as SlikaVrsta,
+                    Slike.[Vsebina] as SlikaVsebina,
+                    Slike.[DatumVnosa] as SlikaDatumVnosa
+            
+                    from [Slike], [PostnaKnjiga]
+                    where [Slike].[Vrsta] like '%Pošta%'
+                    and [Slike].[DatumVnosa] = [PostnaKnjiga].[DatumVnosa]
+                ";*/
+        }
+
+        private string getValidationRecordsPlacilaSqlString()
             {
                 string query = @"
             SELECT TOP({0}) 
