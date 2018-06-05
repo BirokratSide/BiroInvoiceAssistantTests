@@ -69,8 +69,10 @@ namespace SystemTests
                     Slike.[DatumVnosa] as SlikaDatumVnosa
             
                     from [Slike], [PostnaKnjiga]
-                    where [Slike].[Vrsta] = 'Pošta'
-                    and [Slike].[DatumVnosa] = [PostnaKnjiga].[DatumVnosa]";
+                    where [Slike].[Vrsta] like '%Pošta%'
+                    and [Slike].[DatumVnosa] = [PostnaKnjiga].[DatumVnosa]
+
+                    and [Slike].[DatumVnosa] like '%2505%'";
                 return query;
             
         }

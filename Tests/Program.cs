@@ -10,13 +10,16 @@ namespace SystemTests
     {
         static void Main(string[] args)
         {
+
+
+
             Tests.Tests tes = new Tests.Tests();
 
-            tes.StartTestJustOne();
+            tes.StartTestPlacila();
 
-            Thread.Sleep(15000);
+            //Thread.Sleep(15000);
 
-            tes.GetNextInvoiceTest();
+            //tes.GetNextInvoiceTest();
         }
     }
 }

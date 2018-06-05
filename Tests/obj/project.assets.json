@@ -2150,37 +2150,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kristijan\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/km/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\Tests.csproj",
+      "projectUniqueName": "/Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Tests/Tests.csproj",
       "projectName": "Tests",
-      "projectPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\Tests.csproj",
-      "packagesPath": "C:\\Users\\Kristijan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Tests\\obj\\",
+      "projectPath": "/Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Tests/Tests.csproj",
+      "packagesPath": "/Users/km/.nuget/packages/",
+      "outputPath": "/Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Tests/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kristijan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/km/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj": {
-              "projectPath": "C:\\Users\\Kristijan\\source\\repos\\BiroInvoiceAssistantTests\\Common\\Common.csproj"
+            "/Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Common/Common.csproj": {
+              "projectPath": "/Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Common/Common.csproj"
             }
           }
         }
@@ -2195,13 +2193,14 @@
       "netcoreapp2.0": {
         "dependencies": {
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0",
             "autoReferenced": true
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "[11.0.2, )"
+            "version": "11.0.2"
           }
         },
         "imports": [
