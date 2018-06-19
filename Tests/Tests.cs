@@ -9,70 +9,79 @@ using System.IO;
 
 using Newtonsoft.Json;
 using Tests.structs;
+using Microsoft.Extensions.Configuration;
+
+using Tests.helpers;
 
 namespace Tests
 {
     class Tests
     {
         public HttpClient client;
+        public IConfiguration Configuration;
+        public BiroDatabaseAccessor biro;
 
-        public Tests() {
+
+        public Tests()
+        {
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
+
+            // Host init
+            string host_endpoint = Configuration.GetValue<string>("BiroInvoiceAssistant:Endpoint");
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://f6b9e879.ngrok.io/");
+            client.BaseAddress = new Uri(host_endpoint);
+
+            // Database init
+            SBAzureSettings config = new SBAzureSettings(
+                Configuration.GetValue<string>("Database:Username"),
+                Configuration.GetValue<string>("Database:Password"),
+                Configuration.GetValue<string>("Database:Address"),
+                Configuration.GetValue<string>("Database:InitialCatalog"),
+                Configuration.GetValue<bool>("Database:IntegratedSecurity"),
+                Configuration.GetValue<string>("Database:Database"));
+            CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
+            biro = new BiroDatabaseAccessor(SqlConn);
         }
 
-        public void StartTestJustOne() {
-            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
+        #region [public]
+        public HttpResponseMessage StartTestOne(StartingRecord rec)
+        {
+            string query = QueryStringConstants.MakeStartQueryString(rec);
+            HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
+            return msg;
+        }
+        #endregion
 
-            SBAzureSettings config = new SBAzureSettings("turizem", "q", "192.168.0.123", "biroside", false, "biroside");
-            CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
-            BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
+        public void StartTestJustOne()
+        {
+
             SPlacilo placilo = biro.retrieveValidationRecordsKnjigaPoste(15)[14];
 
-            string database = "biro16010264";
-            string company_id = "who";
-            string company_year = "cares";
-            string oznaka = placilo.slika.oznaka;
-            string recno = placilo.slika.recno;
-            string datum_vnosa = placilo.slika.datum_vnosa;
-
-            query = string.Format(query, database, company_id, company_year, oznaka, recno, datum_vnosa);
-
-            HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
+            StartingRecord startingRecord = new StartingRecord("biro16010264", "who", "cares",
+                                                               placilo.slika.oznaka, placilo.slika.recno, placilo.slika.datum_vnosa);
+            StartTestOne(startingRecord);
         }
 
-        public void StartTest() {
-            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
+        public void StartTest()
+        {
 
-            SBAzureSettings config = new SBAzureSettings("sa", "spremeni1", "192.168.0.169", "biroside", false, "biroside");
-            CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
-            BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
             List<SPlacilo> placila = biro.retrieveValidationRecordsKnjigaPoste(10);
             for (int i = 0; i < placila.Count; i++)
             {
                 SPlacilo placilo = placila[i];
-
-                string database = "biro16010264";
-                string company_id = "who";
-                string company_year = "cares";
-                string oznaka = placilo.slika.oznaka;
-                string recno = placilo.slika.recno;
-                string datum_vnosa = placilo.slika.datum_vnosa;
-
-                query = string.Format(query, database, company_id, company_year, oznaka, recno, datum_vnosa);
-
-                HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
-
+                StartingRecord startingRecord = new StartingRecord("biro16010264", "who", "cares",
+                                                               placilo.slika.oznaka, placilo.slika.recno, placilo.slika.datum_vnosa);
+                StartTestOne(startingRecord);
                 Thread.Sleep(5000);
             }
         }
 
-        public void StartTestPlacila() {
-            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
+        public void StartTestPlacila()
+        {
 
-            SBAzureSettings config = new SBAzureSettings("sa", "spremeni1", "192.168.0.169", "biroside", false, "biroside");
-            CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
-            BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
             List<SPlacilo> placila = biro.retrieveValidationRecordsPlacila(15);
             for (int i = 0; i < placila.Count; i++)
             {
@@ -92,7 +101,7 @@ namespace Tests
                 string recno = placilo.slika.recno;
                 string datum_vnosa = placilo.slika.datum_vnosa;
 
-                query = string.Format(query, database, company_id, company_year, oznaka, recno, datum_vnosa);
+                string query = string.Format(QueryStringConstants.START_QUERY, database, company_id, company_year, oznaka, recno, datum_vnosa);
 
                 HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
 
@@ -100,8 +109,9 @@ namespace Tests
             }
         }
 
-        public void GetNextInvoiceTest() {
-            string query = "/api/invoice/get-next?user_id=5";
+        public void GetNextInvoiceTest()
+        {
+            string query = QueryStringConstants.MakeGetNextQueryString(5);
 
             HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
             string content = msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
@@ -115,5 +125,8 @@ namespace Tests
             Console.WriteLine(content);
 
         }
+
+        #region [CONSTANT QUERY STRINGS]
+        #endregion
     }
 }

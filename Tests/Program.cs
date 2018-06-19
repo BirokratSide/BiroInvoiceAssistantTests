@@ -11,11 +11,12 @@ namespace SystemTests
     {
         static void Main(string[] args)
         {
-            Tests.Tests tes = new Tests.Tests();
+            Console.WriteLine(DateTime.Now.ToString("ddMMyyhhmm"));
+            //Tests.Tests tes = new Tests.Tests();
 
-            tes.StartTestPlacila();
+            //tes.StartTestPlacila();
 
-            tes.GetNextInvoiceTest();
+            //tes.GetNextInvoiceTest();
         }
     }
 }
