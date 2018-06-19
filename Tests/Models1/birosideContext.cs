@@ -1,28 +1,70 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+using Common.utils;
 
 namespace Tests.Models1
 {
     public partial class birosideContext : DbContext
     {
+
+        IConfiguration Configuration;
+        string ConnectionString;
+
         public birosideContext()
         {
+            LoadFromSettings();
         }
 
         public birosideContext(DbContextOptions<birosideContext> options)
             : base(options)
         {
+            LoadFromSettings();
+        }
+
+        public void LoadFromSettings()
+        {
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
+
+            // Database init
+            SBAzureSettings config = new SBAzureSettings(
+                Configuration.GetValue<string>("Database:Username"),
+                Configuration.GetValue<string>("Database:Password"),
+                Configuration.GetValue<string>("Database:Address"),
+                Configuration.GetValue<string>("Database:InitialCatalog"),
+                Configuration.GetValue<bool>("Database:IntegratedSecurity"),
+                Configuration.GetValue<string>("Database:Database"));
+
+            if (!Configuration.GetValue<bool>("Database:IntegratedSecurity"))
+            {
+                ConnectionString = String.Format("Sever={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
+                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("Database:Database"),
+                                                 Configuration.GetValue<string>("Database:Username"),
+                                                 Configuration.GetValue<string>("Database:Password"));
+            }
+            else
+            {
+                ConnectionString = String.Format("Sever={0};Database={1};Trusted_Connection=true",
+                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("Database:Database"));
+            }
         }
 
         public virtual DbSet<BufferHistoryLog> BufferHistoryLog { get; set; }
         public virtual DbSet<InvoiceBuffer> InvoiceBuffer { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=192.168.0.123;Database=biroside;Trusted_Connection=False;User=turizem;Password=q");
             }
         }

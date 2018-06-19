@@ -1,18 +1,58 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+using Common.utils;
 
 namespace Tests.Models
 {
     public partial class biro16010264Context : DbContext
     {
+        IConfiguration Configuration;
+        string ConnectionString;
+
         public biro16010264Context()
         {
+            LoadFromSettings();
         }
 
         public biro16010264Context(DbContextOptions<biro16010264Context> options)
             : base(options)
         {
+            LoadFromSettings();
+        }
+
+        public void LoadFromSettings() {
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
+
+            // Database init
+            SBAzureSettings config = new SBAzureSettings(
+                Configuration.GetValue<string>("Database:Username"),
+                Configuration.GetValue<string>("Database:Password"),
+                Configuration.GetValue<string>("Database:Address"),
+                Configuration.GetValue<string>("Database:InitialCatalog"),
+                Configuration.GetValue<bool>("Database:IntegratedSecurity"),
+                Configuration.GetValue<string>("Database:Database"));
+
+            if (!Configuration.GetValue<bool>("Database:IntegratedSecurity"))
+            {
+                ConnectionString = String.Format("Sever={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
+                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("Database:Database"),
+                                                 Configuration.GetValue<string>("Database:Username"),
+                                                 Configuration.GetValue<string>("Database:Password"));
+            }
+            else
+            {
+                ConnectionString = String.Format("Sever={0};Database={1};Trusted_Connection=true",
+                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("Database:Database"));
+            }
         }
 
         public virtual DbSet<PostnaKnjiga> PostnaKnjiga { get; set; }
