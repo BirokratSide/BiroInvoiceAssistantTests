@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading;
 
 using Common.utils;
+using Tests;
 
 namespace SystemTests
 {
@@ -10,16 +11,11 @@ namespace SystemTests
     {
         static void Main(string[] args)
         {
-
-
-
             Tests.Tests tes = new Tests.Tests();
 
             tes.StartTestPlacila();
 
-            //Thread.Sleep(15000);
-
-            //tes.GetNextInvoiceTest();
+            tes.GetNextInvoiceTest();
         }
     }
 }

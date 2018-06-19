@@ -9,12 +9,10 @@ namespace Tests
 {
     public class TestCaseAdder
     {
-        public TestCaseAdder()
-        {
+        public TestCaseAdder() {
         }
 
-        public void AddHardcodedTestCaseToKnjigaPoste()
-        {
+        public void AddHardcodedTestCaseToKnjigaPoste() {
             // want to add a new test case - my rachuns from airbnb
             biro16010264Context ctx = new biro16010264Context();
 
