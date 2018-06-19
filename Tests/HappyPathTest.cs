@@ -40,7 +40,6 @@ namespace Tests
 
 
             // Start the processing by the host
-            string query = QueryStr
             host.GetAsync("api/invoice/start");
 
 

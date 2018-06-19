@@ -25,3 +25,17 @@ c:/users/kristijan/source/repos/BiroInvoiceAssistantTests/Tests/obj/Debug/netcor
 /Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Tests/obj/Debug/netcoreapp2.0/Tests.AssemblyInfo.cs
 /Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Tests/obj/Debug/netcoreapp2.0/Tests.dll
 /Users/km/Desktop/playground/birokrat/rihard/BiroInvoiceAssistantTests/Tests/obj/Debug/netcoreapp2.0/Tests.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.deps.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.dev.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Common.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Common.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csprojResolveAssemblyReference.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CoreCompileInputs.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfoInputs.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfo.cs
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CopyComplete
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.pdb
