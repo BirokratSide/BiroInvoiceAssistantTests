@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using SystemTests;
 using System.Threading;
+using System.IO;
 
 using Newtonsoft.Json;
 using Tests.structs;
@@ -17,7 +18,7 @@ namespace Tests
 
         public Tests() {
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:13694/");
+            client.BaseAddress = new Uri("http://f6b9e879.ngrok.io/");
         }
 
         public void StartTestJustOne() {
@@ -26,7 +27,7 @@ namespace Tests
             SBAzureSettings config = new SBAzureSettings("turizem", "q", "192.168.0.123", "biroside", false, "biroside");
             CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
             BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
-            SPlacilo placilo = biro.retrieveValidationRecordsKnjigaPoste(5)[4];
+            SPlacilo placilo = biro.retrieveValidationRecordsKnjigaPoste(15)[14];
 
             string database = "biro16010264";
             string company_id = "who";
@@ -43,13 +44,46 @@ namespace Tests
         public void StartTest() {
             string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
 
-            SBAzureSettings config = new SBAzureSettings("turizem", "q", "192.168.0.123", "biroside", false, "biroside");
+            SBAzureSettings config = new SBAzureSettings("sa", "spremeni1", "192.168.0.169", "biroside", false, "biroside");
             CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
             BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
-            List<SPlacilo> placila = biro.retrieveValidationRecordsKnjigaPoste(50);
-            for (int i = 0; i < 50; i++)
+            List<SPlacilo> placila = biro.retrieveValidationRecordsKnjigaPoste(10);
+            for (int i = 0; i < placila.Count; i++)
             {
                 SPlacilo placilo = placila[i];
+
+                string database = "biro16010264";
+                string company_id = "who";
+                string company_year = "cares";
+                string oznaka = placilo.slika.oznaka;
+                string recno = placilo.slika.recno;
+                string datum_vnosa = placilo.slika.datum_vnosa;
+
+                query = string.Format(query, database, company_id, company_year, oznaka, recno, datum_vnosa);
+
+                HttpResponseMessage msg = client.GetAsync(query).GetAwaiter().GetResult();
+
+                Thread.Sleep(5000);
+            }
+        }
+
+        public void StartTestPlacila() {
+            string query = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
+
+            SBAzureSettings config = new SBAzureSettings("sa", "spremeni1", "192.168.0.169", "biroside", false, "biroside");
+            CMsSqlConnection SqlConn = new CMsSqlConnection(GSqlUtils.GetConnectionString(config.database, config.username, config.password, "", config.integrated_security));
+            BiroDatabaseAccessor biro = new BiroDatabaseAccessor(SqlConn);
+            List<SPlacilo> placila = biro.retrieveValidationRecordsPlacila(15);
+            for (int i = 0; i < placila.Count; i++)
+            {
+                SPlacilo placilo = placila[i];
+
+                byte[] arr = Encoding.GetEncoding(1250).GetBytes(placilo.slika.vsebina);
+                MemoryStream data = new MemoryStream(arr);
+                FileStream fs = new FileStream(@"/Users/km/Desktop/pajnic" + i + ".pdf", FileMode.Create, FileAccess.ReadWrite);
+                data.CopyTo(fs);
+                fs.Close();
+                data.Close();
 
                 string database = "biro16010264";
                 string company_id = "who";
