@@ -58,7 +58,7 @@ namespace Tests
 
             for (int i = 0; i < oznake.Length; i++) {
                 Models1.InvoiceBuffer buf = GetNextRecord();
-                AssertLocked(buf);
+                buf = AssertLocked(buf);
 
                 FinishRecord(buf);
                 AssertFinished(buf);
@@ -121,27 +121,52 @@ namespace Tests
             return ret;
         }
 
-        private void AssertLocked(Models1.InvoiceBuffer rec)
+        private Models1.InvoiceBuffer AssertLocked(Models1.InvoiceBuffer rec)
         {
-            // TODO
+            string Oznaka = rec.Oznaka;
+            rec = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).First();
+            if (rec.LockedBy != null && rec.LockedTime != null)
+            {
+                Console.WriteLine("AssertLocked: Passed");
+            } else {
+                throw new Exception("LockedBy or LockedTime were null during AssertLocked!");
+            }
+            return rec;
         }
 
-        private void FinishRecord(Models1.InvoiceBuffer ret)
+        private void FinishRecord(Models1.InvoiceBuffer rec)
         {
             // complete the record such that the fields prefixed by Finished are now filled with
             // data
-            ret.FinishedBy = 5; // your UserID
-            ret.FinishedGross = ret.RihGross;
-            ret.FinishedVat = ret.FinishedVat;
+            rec.FinishedBy = 5; // your UserID
+            rec.FinishedGross = rec.RihGross;
+            rec.FinishedVat = rec.FinishedVat;
 
             // finish the record via the host
-            string content = JsonConvert.SerializeObject(ret);
+            string content = JsonConvert.SerializeObject(rec);
             QueryStringConstants.PostFinish(content, host);
         }
 
-        private void AssertFinished(Models1.InvoiceBuffer ret)
+        private void AssertFinished(Models1.InvoiceBuffer rec)
         {
-            // TODO
+            string Oznaka = rec.Oznaka;
+
+            Models1.InvoiceBuffer[] array = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).ToArray();
+            if (array.Length == 0) {
+                Console.WriteLine("AssertFinished-DeleteInvoiceBufferRecord: PASSED");
+            } else {
+                throw new Exception("The invoice buffer was not deleted on finish!!!");
+            }
+
+            BufferHistoryLog log = contextBiroside.BufferHistoryLog.Where((x) => (x.Oznaka == Oznaka)).First();
+            if (log.FinishedBy != null && log.FinishedTime != null)
+            {
+                Console.WriteLine("AssertFinished: Passed");
+            }
+            else
+            {
+                throw new Exception("FinishedBy or FinishedTime were null during AssertFinished!");
+            }
         }
         #endregion
     }
