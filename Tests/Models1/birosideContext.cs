@@ -65,7 +65,7 @@ namespace Tests.Models1
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=192.168.0.123;Database=biroside;Trusted_Connection=False;User=turizem;Password=q");
+                optionsBuilder.UseSqlServer(ConnectionString);
             }
         }
 

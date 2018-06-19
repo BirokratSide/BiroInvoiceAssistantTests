@@ -62,7 +62,7 @@ namespace Tests.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=biro16010264;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(ConnectionString);
             }
         }
 
