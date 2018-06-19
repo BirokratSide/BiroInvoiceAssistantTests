@@ -7,6 +7,7 @@ using System.Collections;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Text;
+using System.Threading;
 
 using Tests.helpers;
 using Tests.structs;
@@ -47,7 +48,26 @@ namespace Tests
 
         public void Start()
         {
-            string directory = @"/Users/km/Dropbox/docs/archives/mng/mng/docs/airbnb/racuni";
+            string[] oznake = InsertNewTestCasesToDatabaseKPAndSlike();
+
+            StartRecordsHost(oznake);
+
+            Thread.Sleep(5000);
+
+            AssertAllRecordsProcessed(oznake);
+
+            for (int i = 0; i < oznake.Length; i++) {
+                Models1.InvoiceBuffer buf = GetNextRecord();
+                AssertLocked(buf);
+
+                FinishRecord(buf);
+                AssertFinished(buf);
+            }
+        }
+
+        #region [private]
+        private string[] InsertNewTestCasesToDatabaseKPAndSlike() {
+            string directory = Configuration.GetValue<string>("HappyPathInputDirectory");
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
 
             // add new records into the database
@@ -57,34 +77,29 @@ namespace Tests
                 string date = DateTime.Now.ToString("ddMMyy") + "0000";
                 oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, "some", fileArray[i]);
             }
-
-            // get the actual records from database
-            Slike s = context.Slike.Where((x) => (x.Oznaka == oznake[0])).ToArray()[0];
-            StartingRecord record = new StartingRecord("16010264", "who", "cares", s.Oznaka, s.RecNo.ToString(), s.DatumVnosa);
-
-            // Start the processing by the host
-
-            string query = QueryStringConstants.MakeStartQueryString(record);
-            HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
-            host.GetAsync(query);
-
-
-            // verify that they have been processed by Rihard after 30 seconds
-            Models1.InvoiceBuffer buf = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznake[0])).ToArray()[0];
-            AssertProcessed(buf);
-
-
-            // verify that getting the record locks it
-            Models1.InvoiceBuffer buf = ExecLockPhase();
-            AssertLocked(null);
-
-
-            // finish the record and verify that it has been correctly finished
-            ExecFinishPhase(buf);
-            AssertFinished();
+            return oznake;
         }
 
-        private void AssertProcessed(Models1.InvoiceBuffer buf) {
+        private void StartRecordsHost(string[] oznake) {
+            for (int i = 0; i < oznake.Length; i++)
+            {
+                Slike s = context.Slike.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
+                StartingRecord record = new StartingRecord("16010264", "who", "cares", s.Oznaka, s.RecNo.ToString(), s.DatumVnosa);
+                string query = QueryStringConstants.MakeStartQueryString(record);
+                HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
+            }
+        }
+
+        private void AssertAllRecordsProcessed(string[] oznake) {
+            foreach (string oznaka in oznake)
+            {
+                Models1.InvoiceBuffer bufferRecord = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznaka)).ToArray()[0];
+                AssertProcessed(bufferRecord);
+            }
+        }
+
+        private void AssertProcessed(Models1.InvoiceBuffer buf)
+        {
             Console.WriteLine("RihNet: " + buf.RihNet);
             Console.WriteLine("RihVat: " + buf.RihVat);
             Console.WriteLine("RihGross: " + buf.RihGross);
@@ -94,7 +109,8 @@ namespace Tests
             Console.WriteLine("RihVatIdPublisher: " + buf.RihVatIdPublisher);
         }
 
-        private Models1.InvoiceBuffer ExecLockPhase() {
+        private Models1.InvoiceBuffer GetNextRecord()
+        {
             string query = QueryStringConstants.MakeGetNextQueryString(5);
 
             HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
@@ -105,11 +121,13 @@ namespace Tests
             return ret;
         }
 
-        private void AssertLocked(Models1.InvoiceBuffer rec) {
-            
+        private void AssertLocked(Models1.InvoiceBuffer rec)
+        {
+            // TODO
         }
 
-        private void ExecFinishPhase(Models1.InvoiceBuffer ret) {
+        private void FinishRecord(Models1.InvoiceBuffer ret)
+        {
             // complete the record such that the fields prefixed by Finished are now filled with
             // data
             ret.FinishedBy = 5; // your UserID
@@ -121,8 +139,10 @@ namespace Tests
             QueryStringConstants.PostFinish(content, host);
         }
 
-        private void AssertFinished() {
-            
+        private void AssertFinished(Models1.InvoiceBuffer ret)
+        {
+            // TODO
         }
+        #endregion
     }
 }
