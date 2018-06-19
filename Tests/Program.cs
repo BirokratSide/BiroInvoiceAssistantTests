@@ -11,12 +11,8 @@ namespace SystemTests
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(DateTime.Now.ToString("ddMMyyhhmm"));
-            //Tests.Tests tes = new Tests.Tests();
-
-            //tes.StartTestPlacila();
-
-            //tes.GetNextInvoiceTest();
+            HappyPathTest tst = new HappyPathTest();
+            tst.Start();
         }
     }
 }

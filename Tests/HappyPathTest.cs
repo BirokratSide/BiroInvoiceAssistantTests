@@ -37,7 +37,7 @@ namespace Tests
 
             // host
             host = new HttpClient();
-            host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssitant:Endpoint"));
+            host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssistant:Endpoint"));
 
             // database
             context = new biro16010264Context();
