@@ -1,5 +1,8 @@
 ﻿using System;
 using Tests.structs;
+using System.Web;
+using System.Net.Http;
+using System.Text;
 
 namespace Tests.helpers
 {
@@ -14,6 +17,13 @@ namespace Tests.helpers
 
         public static string MakeGetNextQueryString(int user_id) {
             return String.Format(GET_NEXT_QUERY, user_id);
+        }
+
+        public static string PostFinish(string content, HttpClient client) {
+            string query = "/api/invoice/finish";
+            StringContent contentStr = new StringContent(content, Encoding.UTF8, "application/json");
+            var msg = client.PostAsync(query, contentStr).GetAwaiter().GetResult();
+            return msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
         }
     }
 }

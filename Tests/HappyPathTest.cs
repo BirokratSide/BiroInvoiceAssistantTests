@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Web;
 using System.Collections;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Text;
 
 using Tests.helpers;
 using Tests.structs;
@@ -67,17 +69,60 @@ namespace Tests
             host.GetAsync(query);
 
 
-
             // verify that they have been processed by Rihard after 30 seconds
+            Models1.InvoiceBuffer buf = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznake[0])).ToArray()[0];
+            AssertProcessed(buf);
 
 
-
-            // verify that Student app zakljucs them
-
-
-            // verify that everything is set up as it should have been
+            // verify that getting the record locks it
+            Models1.InvoiceBuffer buf = ExecLockPhase();
+            AssertLocked(null);
 
 
+            // finish the record and verify that it has been correctly finished
+            ExecFinishPhase(buf);
+            AssertFinished();
+        }
+
+        private void AssertProcessed(Models1.InvoiceBuffer buf) {
+            Console.WriteLine("RihNet: " + buf.RihNet);
+            Console.WriteLine("RihVat: " + buf.RihVat);
+            Console.WriteLine("RihGross: " + buf.RihGross);
+            Console.WriteLine("RihInvNum: " + buf.RihInvNum);
+            Console.WriteLine("RihReference: " + buf.RihReference);
+            Console.WriteLine("RihVatIdBuyer: " + buf.RihVatIdBuyer);
+            Console.WriteLine("RihVatIdPublisher: " + buf.RihVatIdPublisher);
+        }
+
+        private Models1.InvoiceBuffer ExecLockPhase() {
+            string query = QueryStringConstants.MakeGetNextQueryString(5);
+
+            HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
+            string content = msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            Models1.InvoiceBuffer ret = JsonConvert.DeserializeObject<Models1.InvoiceBuffer>(content);
+
+            return ret;
+        }
+
+        private void AssertLocked(Models1.InvoiceBuffer rec) {
+            
+        }
+
+        private void ExecFinishPhase(Models1.InvoiceBuffer ret) {
+            // complete the record such that the fields prefixed by Finished are now filled with
+            // data
+            ret.FinishedBy = 5; // your UserID
+            ret.FinishedGross = ret.RihGross;
+            ret.FinishedVat = ret.FinishedVat;
+
+            // finish the record via the host
+            string content = JsonConvert.SerializeObject(ret);
+            QueryStringConstants.PostFinish(content, host);
+        }
+
+        private void AssertFinished() {
+            
         }
     }
 }
