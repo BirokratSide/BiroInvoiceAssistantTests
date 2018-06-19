@@ -3,8 +3,12 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using System.Web;
+using System.Collections;
+using System.Linq;
 
 using Tests.helpers;
+using Tests.structs;
+using Tests.Models;
 
 namespace Tests
 {
@@ -14,18 +18,24 @@ namespace Tests
         TestCaseAdder TestCaseAdder;
         IConfiguration Configuration;
         HttpClient host;
+        biro16010264Context context;
 
         public HappyPathTest()
         {
-            TestCaseAdder = new TestCaseAdder();
-
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
 
+            // test case adder
+            TestCaseAdder = new TestCaseAdder();
+
+            // host
             host = new HttpClient();
             host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssitant:Endpoint"));
+
+            // database
+            context = new biro16010264Context();
         }
 
         public void Start() {
@@ -33,15 +43,19 @@ namespace Tests
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
 
             // add new records into the database
+            string[] oznake = new string[fileArray.Length];
             for (int i = 0; i < fileArray.Length; i++) {
                 string date = DateTime.Now.ToString("ddMMyy") + "0000";
-                TestCaseAdder.AddTestCaseToDatabase(date, (short)i, "some", fileArray[i]);
+                oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, "some", fileArray[i]);
             }
 
+            // get the actual records from database
+            Slike s = context.Slike.Where((x) => (x.Oznaka == oznake[0])).ToArray()[0];
+            StartingRecord record = new StartingRecord("16010264", "who", "cares", s.Oznaka, s.RecNo.ToString(), s.DatumVnosa);
 
             // Start the processing by the host
-            string query = QueryStr
-            host.GetAsync("api/invoice/start");
+            string query = QueryStringConstants.MakeStartQueryString(record);
+            HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
 
 
             // verify that they have been processed by Rihard after 30 seconds

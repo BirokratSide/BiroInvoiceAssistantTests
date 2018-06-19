@@ -20,7 +20,7 @@ namespace Tests
             AddTestCaseToDatabase(datum_vnosa, zap_st, year_code, file_path);
         }
 
-        public void AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path) {
+        public string AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path) {
             // want to add a new test case - my rachuns from airbnb
             biro16010264Context ctx = new biro16010264Context();
 
@@ -41,6 +41,8 @@ namespace Tests
             ctx.PostnaKnjiga.Add(pk);
             ctx.Slike.Add(s);
             ctx.SaveChanges();
+
+            return s.Oznaka;
         }
     }
 }
