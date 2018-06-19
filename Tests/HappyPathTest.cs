@@ -54,8 +54,12 @@ namespace Tests
             StartingRecord record = new StartingRecord("16010264", "who", "cares", s.Oznaka, s.RecNo.ToString(), s.DatumVnosa);
 
             // Start the processing by the host
+
             string query = QueryStringConstants.MakeStartQueryString(record);
             HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
+
+            host.GetAsync("api/invoice/start");
+
 
 
             // verify that they have been processed by Rihard after 30 seconds
