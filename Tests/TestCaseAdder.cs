@@ -38,6 +38,9 @@ namespace Tests
             s.Oznaka = pk.DatumVnosa + " " + pk.ZapSt;
             s.YearCode = year_code;
 
+            pk.SyncId = Guid.NewGuid();
+            s.SyncId = Guid.NewGuid();
+
             ctx.PostnaKnjiga.Add(pk);
             ctx.Slike.Add(s);
             ctx.SaveChanges();

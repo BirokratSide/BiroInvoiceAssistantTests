@@ -43,7 +43,7 @@ namespace Tests.Models1
 
             if (!Configuration.GetValue<bool>("Database:IntegratedSecurity"))
             {
-                ConnectionString = String.Format("Sever={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
+                ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
                                                  Configuration.GetValue<string>("Database:Address"),
                                                  Configuration.GetValue<string>("Database:Database"),
                                                  Configuration.GetValue<string>("Database:Username"),
@@ -51,7 +51,7 @@ namespace Tests.Models1
             }
             else
             {
-                ConnectionString = String.Format("Sever={0};Database={1};Trusted_Connection=true",
+                ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=true",
                                                  Configuration.GetValue<string>("Database:Address"),
                                                  Configuration.GetValue<string>("Database:Database"));
             }
