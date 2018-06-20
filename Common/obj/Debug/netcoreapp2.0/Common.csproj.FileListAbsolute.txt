@@ -25,3 +25,12 @@ C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfo.cs
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.dll
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.pdb
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\bin\Debug\netcoreapp2.0\Common.deps.json
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\bin\Debug\netcoreapp2.0\Common.dll
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\bin\Debug\netcoreapp2.0\Common.pdb
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.csprojResolveAssemblyReference.cache
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfoInputs.cache
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfo.cs
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.dll
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.pdb
