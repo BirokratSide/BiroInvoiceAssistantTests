@@ -39,6 +39,7 @@ C:/Users/Kristijan/Desktop/playground/BiroInvoiceAssistantTests/Tests/obj/Debug/
 C:/Users/Kristijan/Desktop/playground/BiroInvoiceAssistantTests/Tests/obj/Debug/netcoreapp2.0/Tests.csproj.CopyComplete
 C:/Users/Kristijan/Desktop/playground/BiroInvoiceAssistantTests/Tests/obj/Debug/netcoreapp2.0/Tests.dll
 C:/Users/Kristijan/Desktop/playground/BiroInvoiceAssistantTests/Tests/obj/Debug/netcoreapp2.0/Tests.pdb
+<<<<<<< HEAD
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.deps.json
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.json
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.dev.json
@@ -53,3 +54,19 @@ C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netco
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CoreCompileInputs.cache
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfoInputs.cache
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CopyComplete
+=======
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.deps.json
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.json
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.runtimeconfig.dev.json
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.dll
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Tests.pdb
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Common.dll
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\bin\Debug\netcoreapp2.0\Common.pdb
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csprojResolveAssemblyReference.cache
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CoreCompileInputs.cache
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfoInputs.cache
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.AssemblyInfo.cs
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.csproj.CopyComplete
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.dll
+C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Tests\obj\Debug\netcoreapp2.0\Tests.pdb
+>>>>>>> b1c7c4a14ac793a001570cbb6d0d678400ae59b2

@@ -3676,23 +3676,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\kiki\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\km\\.nuget\\packages\\": {},
+>>>>>>> b1c7c4a14ac793a001570cbb6d0d678400ae59b2
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\kiki\\Desktop\\playground\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
       "projectName": "Common",
       "projectPath": "C:\\Users\\kiki\\Desktop\\playground\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
       "packagesPath": "C:\\Users\\kiki\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\kiki\\Desktop\\playground\\BiroInvoiceAssistantTests\\Common\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\km\\Desktop\\playground\\birokrat\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
+      "projectName": "Common",
+      "projectPath": "C:\\Users\\km\\Desktop\\playground\\birokrat\\BiroInvoiceAssistantTests\\Common\\Common.csproj",
+      "packagesPath": "C:\\Users\\km\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\km\\Desktop\\playground\\birokrat\\BiroInvoiceAssistantTests\\Common\\obj\\",
+>>>>>>> b1c7c4a14ac793a001570cbb6d0d678400ae59b2
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\kiki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\km\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> b1c7c4a14ac793a001570cbb6d0d678400ae59b2
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
