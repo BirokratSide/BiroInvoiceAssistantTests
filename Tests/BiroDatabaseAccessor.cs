@@ -10,12 +10,10 @@ namespace SystemTests
     class BiroDatabaseAccessor
     {
             CMsSqlConnection sqlConnection;
-            string databaseName;
 
             public BiroDatabaseAccessor(CMsSqlConnection conn)
             {
                 sqlConnection = conn;
-                this.databaseName = databaseName;
             }
 
             #region [public]

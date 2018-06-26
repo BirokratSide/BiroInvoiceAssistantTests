@@ -45,3 +45,4 @@ C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Deb
 C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.dll
 C:\Users\km\Desktop\playground\birokrat\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.pdb
 >>>>>>> b1c7c4a14ac793a001570cbb6d0d678400ae59b2
+C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.csprojAssemblyReference.cache

@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using Tests.Models;
+using Tests.data;
+using Tests.data.structs;
 
 namespace Tests
 {
     public class TestCaseAdder
     {
-        public TestCaseAdder() {
+        CBirokrat birokrat;
+
+        public TestCaseAdder(CBirokrat birokrat) {
+            this.birokrat = birokrat;
         }
 
         public void HardcodedCase() {
@@ -22,9 +26,8 @@ namespace Tests
 
         public string AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path) {
             // want to add a new test case - my rachuns from airbnb
-            biro16010264Context ctx = new biro16010264Context();
 
-            PostnaKnjiga pk = new PostnaKnjiga();
+            SPostnaKnjiga pk = new SPostnaKnjiga();
             pk.DatumVnosa = datum_vnosa;
             pk.ZapSt = zap_st;
             pk.YearCode = year_code;
@@ -33,7 +36,7 @@ namespace Tests
             byte[] arr = File.ReadAllBytes(file_path);
             string content = Encoding.GetEncoding(1250).GetString(arr);
 
-            Slike s = new Slike();
+            SSlike s = new SSlike();
             s.Vsebina = content;
             s.Oznaka = pk.DatumVnosa + " " + pk.ZapSt;
             s.YearCode = year_code;
@@ -41,10 +44,8 @@ namespace Tests
             pk.SyncId = Guid.NewGuid();
             s.SyncId = Guid.NewGuid();
 
-            ctx.PostnaKnjiga.Add(pk);
-            ctx.Slike.Add(s);
-            ctx.SaveChanges();
-
+            birokrat.PostnaKnjiga.Save(pk);
+            birokrat.Slike.Save(s);
             return s.Oznaka;
         }
     }

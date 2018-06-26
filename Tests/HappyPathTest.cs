@@ -14,6 +14,7 @@ using Tests.helpers;
 using Tests.structs;
 using Tests.data.structs;
 using Tests.Models1;
+using System.Collections.Generic;
 
 namespace Tests
 {
@@ -34,15 +35,15 @@ namespace Tests
             .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
 
+            // database
+            birokrat = new CBirokrat();
+
             // test case adder
-            TestCaseAdder = new TestCaseAdder();
+            TestCaseAdder = new TestCaseAdder(birokrat);
 
             // host
             host = new HttpClient();
             host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssistant:Endpoint"));
-
-            // database
-            birokrat = new CBirokrat();
 
             // biroside database
             contextBiroside = new birosideContext();
@@ -82,13 +83,17 @@ namespace Tests
             return oznake;
         }
 
-        private void StartRecordsHost(string[] oznake) {
+        
+    private void StartRecordsHost(string[] oznake) {
+
+            SListRequest lrq = new SListRequest();
+            SListResponse<SSlike> s = birokrat.Slike.List(new SListRequest());
+            List<SSlike> data = s.data;
             for (int i = 0; i < oznake.Length; i++)
             {
-                SListRequest lrq = new SListRequest();
-                SListResponse<SSlike> s = birokrat.Slike.List(new SListRequest())
-                Slike s = context.Slike.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
-                StartingRecord record = new StartingRecord("16010264", "who", "cares", s.Oznaka, s.RecNo.ToString(), s.DatumVnosa);
+                SSlike slk = data.Where((x) =>  (x.Oznaka == oznake[i])).ToArray()[0];
+                
+                StartingRecord record = new StartingRecord("16010264", "who", "cares", slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
                 string query = QueryStringConstants.MakeStartQueryString(record);
                 HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
             }

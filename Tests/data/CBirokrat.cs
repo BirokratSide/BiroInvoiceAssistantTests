@@ -10,7 +10,7 @@ using Tests.data.accessors;
 
 namespace Tests.data
 {
-    class CBirokrat
+    public class CBirokrat
     {
 
         private IConfiguration Configuration;

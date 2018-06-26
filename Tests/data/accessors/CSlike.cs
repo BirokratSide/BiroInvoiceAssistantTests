@@ -1,14 +1,10 @@
-using si.birokrat.next.common.converting;
-using si.birokrat.next.common.logic;
-using si.birokrat.next.common.logic.biro.catalogue;
-using si.birokrat.next.common.misc;
 using System;
 using System.Data;
 using System.Text;
 
 using Tests.data.structs;
 
-namespace Tests.data {
+namespace Tests.data.accessors {
 	public class CSlike {
 
         CDatabase database;

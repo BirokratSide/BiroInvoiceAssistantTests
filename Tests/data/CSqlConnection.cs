@@ -1,6 +1,4 @@
-﻿using si.birokrat.next.common.conversion;
-using si.birokrat.next.common.data;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
