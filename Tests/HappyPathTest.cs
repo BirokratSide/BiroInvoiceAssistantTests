@@ -13,9 +13,10 @@ using Tests.data;
 using Tests.helpers;
 using Tests.structs;
 using Tests.data.structs;
-using Tests.Models1;
+//using Tests.Models1;
 using System.Collections.Generic;
 
+/*
 namespace Tests
 {
     public class HappyPathTest
@@ -180,3 +181,4 @@ namespace Tests
         #endregion
     }
 }
+*/
