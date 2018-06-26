@@ -11,8 +11,8 @@ namespace SystemTests
     {
         static void Main(string[] args)
         {
-            //HappyPathTest tst = new HappyPathTest();
-            //tst.Start();
+            HappyPathTest tst = new HappyPathTest();
+            tst.Start();
         }
     }
 }

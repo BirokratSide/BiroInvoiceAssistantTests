@@ -13,10 +13,10 @@ using Tests.data;
 using Tests.helpers;
 using Tests.structs;
 using Tests.data.structs;
-//using Tests.Models1;
+using Tests.entity_framework;
 using System.Collections.Generic;
 
-/*
+
 namespace Tests
 {
     public class HappyPathTest
@@ -61,7 +61,7 @@ namespace Tests
             AssertAllRecordsProcessed(oznake);
 
             for (int i = 0; i < oznake.Length; i++) {
-                Models1.InvoiceBuffer buf = GetNextRecord();
+                entity_framework.InvoiceBuffer buf = GetNextRecord();
                 buf = AssertLocked(buf);
 
                 FinishRecord(buf);
@@ -103,12 +103,12 @@ namespace Tests
         private void AssertAllRecordsProcessed(string[] oznake) {
             foreach (string oznaka in oznake)
             {
-                Models1.InvoiceBuffer bufferRecord = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznaka)).ToArray()[0];
+                entity_framework.InvoiceBuffer bufferRecord = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznaka)).ToArray()[0];
                 AssertProcessed(bufferRecord);
             }
         }
 
-        private void AssertProcessed(Models1.InvoiceBuffer buf)
+        private void AssertProcessed(entity_framework.InvoiceBuffer buf)
         {
             Console.WriteLine("RihNet: " + buf.RihNet);
             Console.WriteLine("RihVat: " + buf.RihVat);
@@ -119,19 +119,19 @@ namespace Tests
             Console.WriteLine("RihVatIdPublisher: " + buf.RihVatIdPublisher);
         }
 
-        private Models1.InvoiceBuffer GetNextRecord()
+        private entity_framework.InvoiceBuffer GetNextRecord()
         {
             string query = QueryStringConstants.MakeGetNextQueryString(5);
 
             HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
             string content = msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-            Models1.InvoiceBuffer ret = JsonConvert.DeserializeObject<Models1.InvoiceBuffer>(content);
+            entity_framework.InvoiceBuffer ret = JsonConvert.DeserializeObject<entity_framework.InvoiceBuffer>(content);
 
             return ret;
         }
 
-        private Models1.InvoiceBuffer AssertLocked(Models1.InvoiceBuffer rec)
+        private entity_framework.InvoiceBuffer AssertLocked(entity_framework.InvoiceBuffer rec)
         {
             string Oznaka = rec.Oznaka;
             rec = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).First();
@@ -144,7 +144,7 @@ namespace Tests
             return rec;
         }
 
-        private void FinishRecord(Models1.InvoiceBuffer rec)
+        private void FinishRecord(entity_framework.InvoiceBuffer rec)
         {
             // complete the record such that the fields prefixed by Finished are now filled with
             // data
@@ -157,11 +157,11 @@ namespace Tests
             QueryStringConstants.PostFinish(content, host);
         }
 
-        private void AssertFinished(Models1.InvoiceBuffer rec)
+        private void AssertFinished(entity_framework.InvoiceBuffer rec)
         {
             string Oznaka = rec.Oznaka;
 
-            Models1.InvoiceBuffer[] array = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).ToArray();
+            entity_framework.InvoiceBuffer[] array = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).ToArray();
             if (array.Length == 0) {
                 Console.WriteLine("AssertFinished-DeleteInvoiceBufferRecord: PASSED");
             } else {
@@ -181,4 +181,3 @@ namespace Tests
         #endregion
     }
 }
-*/
