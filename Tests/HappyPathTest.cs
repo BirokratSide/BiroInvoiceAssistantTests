@@ -9,8 +9,10 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Threading;
 
+using Tests.data;
 using Tests.helpers;
 using Tests.structs;
+using Tests.data.structs;
 using Tests.Models1;
 
 namespace Tests
@@ -21,7 +23,9 @@ namespace Tests
         TestCaseAdder TestCaseAdder;
         IConfiguration Configuration;
         HttpClient host;
+
         birosideContext contextBiroside;
+        CBirokrat birokrat;
 
         public HappyPathTest()
         {
@@ -38,7 +42,7 @@ namespace Tests
             host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssistant:Endpoint"));
 
             // database
-            //context = new biro16010264Context();
+            birokrat = new CBirokrat();
 
             // biroside database
             contextBiroside = new birosideContext();
@@ -81,6 +85,8 @@ namespace Tests
         private void StartRecordsHost(string[] oznake) {
             for (int i = 0; i < oznake.Length; i++)
             {
+                SListRequest lrq = new SListRequest();
+                SListResponse<SSlike> s = birokrat.Slike.List(new SListRequest())
                 Slike s = context.Slike.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
                 StartingRecord record = new StartingRecord("16010264", "who", "cares", s.Oznaka, s.RecNo.ToString(), s.DatumVnosa);
                 string query = QueryStringConstants.MakeStartQueryString(record);
