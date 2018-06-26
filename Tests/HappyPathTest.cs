@@ -11,7 +11,6 @@ using System.Threading;
 
 using Tests.helpers;
 using Tests.structs;
-using Tests.Models;
 using Tests.Models1;
 
 namespace Tests
@@ -22,7 +21,6 @@ namespace Tests
         TestCaseAdder TestCaseAdder;
         IConfiguration Configuration;
         HttpClient host;
-        biro16010264Context context;
         birosideContext contextBiroside;
 
         public HappyPathTest()
@@ -40,7 +38,7 @@ namespace Tests
             host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssistant:Endpoint"));
 
             // database
-            context = new biro16010264Context();
+            //context = new biro16010264Context();
 
             // biroside database
             contextBiroside = new birosideContext();
