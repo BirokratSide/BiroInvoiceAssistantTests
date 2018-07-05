@@ -65,8 +65,8 @@ namespace Tests.data
             CMsSqlConnection conn = new CMsSqlConnection((ISqlConnectionString)sqlstring);
             conn.autoOpenClose = true;
 
-            string biroCd = Configuration.GetValue<string>("Database:BiroCd");
-            string biroDb = Configuration.GetValue<string>("Database:BiroDb");
+            string biroCd = Configuration.GetValue<string>("Database:company_year");
+            string biroDb = Configuration.GetValue<string>("Database:company_id");
             this.database = new CDatabase(conn, biroCd, biroDb);
             
         }

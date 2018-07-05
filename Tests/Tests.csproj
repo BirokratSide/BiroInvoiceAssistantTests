@@ -19,10 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="helpers\" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Remove="PostnaKnjigaAccessor.cs" />
   </ItemGroup>

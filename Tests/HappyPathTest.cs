@@ -50,6 +50,7 @@ namespace Tests
         public void Start()
         {
             birokrat.DeleteAllTestRecords(company_year);
+            biroside.DeleteAllTestRecords(company_year);
             string[] oznake = birokrat.AddTestRecordsToDatabase(company_year);
 
             StartRecordsHost(oznake);

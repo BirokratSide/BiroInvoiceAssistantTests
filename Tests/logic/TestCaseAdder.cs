@@ -20,7 +20,7 @@ namespace Tests.logic
             string datum_vnosa = "0406180000";
             short zap_st = 1;
             string year_code = "some";
-            string file_path = @"C:\Users\Kristijan\Desktop\receipts\andre-leston.pdf";
+            string file_path = @"C:/Users/kiki/Desktop/racuni/andre-leston.pdf";
             AddTestCaseToDatabase(datum_vnosa, zap_st, year_code, file_path);
         }
 
@@ -40,6 +40,7 @@ namespace Tests.logic
             s.Vsebina = content;
             s.Oznaka = pk.DatumVnosa + " " + pk.ZapSt;
             s.YearCode = year_code;
+            s.DatumVnosa = datum_vnosa;
 
             pk.SyncId = Guid.NewGuid();
             s.SyncId = Guid.NewGuid();

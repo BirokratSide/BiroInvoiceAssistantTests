@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Linq;
 
 using Tests.entity_framework;
 
@@ -22,6 +23,15 @@ namespace Tests.logic
             Configuration = builder.Build();
 
             biroside = new birosideContext();
+        }
+        public void DeleteAllTestRecords(string company_year) {
+            InvoiceBuffer[] invoices = biroside.InvoiceBuffer.Where((x) => (x.CompanyYearId == company_year)).ToArray();
+            biroside.InvoiceBuffer.RemoveRange(invoices);
+
+            BufferHistoryLog[] hists = biroside.BufferHistoryLog.Where((x) => (x.CompanyYearId == company_year)).ToArray();
+            biroside.BufferHistoryLog.RemoveRange(hists);
+
+            biroside.SaveChanges();
         }
     }
 }

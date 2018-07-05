@@ -43,6 +43,10 @@ namespace Tests.logic
             return InsertNewTestCasesToDatabaseKPAndSlike(company_year);
         }
 
+        public void AddHardcodedTestCase(string company_year) {
+            TestCaseAdder.HardcodedCase();
+        }
+
         public void DeleteAllTestRecords(string company_year)
         {
 
