@@ -29,7 +29,7 @@ namespace Tests.entity_framework
         {
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
+            .AddJsonFile(StaticConst.SETTINGS_PATH);
             Configuration = builder.Build();
 
             // Database init

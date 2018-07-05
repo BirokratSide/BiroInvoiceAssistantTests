@@ -10,8 +10,9 @@ namespace Tests.data.accessors {
         CDatabase database;
 
 		#region // constructor //
-		public CSlike() : base() { }
-		public CSlike(CDatabase biro_next) { }
+		public CSlike(CDatabase database) {
+            this.database = database;
+        }
 		#endregion
 		#region !! ISlike - public !!
 		public bool Delete(SSlike data) {

@@ -6,7 +6,7 @@ using System.Text;
 using Tests.data;
 using Tests.data.structs;
 
-namespace Tests
+namespace Tests.logic
 {
     public class TestCaseAdder
     {

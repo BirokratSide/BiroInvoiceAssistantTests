@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Tests.structs
+namespace Tests.host_client
 {
     public class StartingRecord
     {

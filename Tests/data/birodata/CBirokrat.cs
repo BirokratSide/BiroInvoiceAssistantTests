@@ -44,7 +44,7 @@ namespace Tests.data
         {
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
+            .AddJsonFile(@"C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\appsettings.json");
             Configuration = builder.Build();
 
 
@@ -63,10 +63,12 @@ namespace Tests.data
             sqlstring.database = Configuration.GetValue<string>("Database:Database");
             sqlstring.integratedSecurity = Configuration.GetValue<bool>("Database:IntegratedSecurity");
             CMsSqlConnection conn = new CMsSqlConnection((ISqlConnectionString)sqlstring);
+            conn.autoOpenClose = true;
 
             string biroCd = Configuration.GetValue<string>("Database:BiroCd");
             string biroDb = Configuration.GetValue<string>("Database:BiroDb");
-            CDatabase db = new CDatabase(conn, biroCd, biroDb);
+            this.database = new CDatabase(conn, biroCd, biroDb);
+            
         }
     }
 }

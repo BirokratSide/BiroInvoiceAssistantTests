@@ -4,9 +4,9 @@ using System.Web;
 using System.Net.Http;
 using System.Text;
 
-namespace Tests.helpers
+namespace Tests.host_client
 {
-    public static class QueryStringConstants
+    static class QueryStringConstants
     {
         public static string START_QUERY = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
         public static string GET_NEXT_QUERY = "/api/invoice/get-next?user_id={0}";

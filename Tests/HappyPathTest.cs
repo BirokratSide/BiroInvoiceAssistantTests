@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading;
 
 using Tests.data;
-using Tests.helpers;
-using Tests.structs;
+using Tests.host_client;
+using Tests.logic;
 using Tests.data.structs;
 using Tests.entity_framework;
 using System.Collections.Generic;
@@ -22,37 +22,35 @@ namespace Tests
     public class HappyPathTest
     {
 
-        TestCaseAdder TestCaseAdder;
         IConfiguration Configuration;
-        HttpClient host;
 
-        birosideContext contextBiroside;
-        CBirokrat birokrat;
+        BIAHostClient client;
+        BirokratLogic birokrat;
+        BirosideLogic biroside;
+
+        string company_id;
+        string company_year;
+        int user_id;
 
         public HappyPathTest()
         {
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
+            .AddJsonFile(StaticConst.SETTINGS_PATH);
             Configuration = builder.Build();
 
-            // database
-            birokrat = new CBirokrat();
-
-            // test case adder
-            TestCaseAdder = new TestCaseAdder(birokrat);
-
-            // host
-            host = new HttpClient();
-            host.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssistant:Endpoint"));
-
-            // biroside database
-            contextBiroside = new birosideContext();
+            client = new BIAHostClient();
+            birokrat = new BirokratLogic();
+            biroside = new BirosideLogic();
+            company_id = Configuration.GetValue<string>("Database:company_id");
+            company_year = Configuration.GetValue<string>("Database:company_year");
+            user_id = 5;
         }
 
         public void Start()
         {
-            string[] oznake = InsertNewTestCasesToDatabaseKPAndSlike();
+            birokrat.DeleteAllTestRecords(company_year);
+            string[] oznake = birokrat.AddTestRecordsToDatabase(company_year);
 
             StartRecordsHost(oznake);
 
@@ -61,7 +59,7 @@ namespace Tests
             AssertAllRecordsProcessed(oznake);
 
             for (int i = 0; i < oznake.Length; i++) {
-                entity_framework.InvoiceBuffer buf = GetNextRecord();
+                entity_framework.InvoiceBuffer buf = client.Next(user_id);
                 buf = AssertLocked(buf);
 
                 FinishRecord(buf);
@@ -70,40 +68,22 @@ namespace Tests
         }
 
         #region [private]
-        private string[] InsertNewTestCasesToDatabaseKPAndSlike() {
-            string directory = Configuration.GetValue<string>("HappyPathInputDirectory");
-            string[] fileArray = Directory.GetFiles(directory, "*.pdf");
+        private void StartRecordsHost(string[] oznake) {
 
-            // add new records into the database
-            string[] oznake = new string[fileArray.Length];
-            for (int i = 0; i < fileArray.Length; i++)
-            {
-                string date = DateTime.Now.ToString("ddMMyy") + "0000";
-                oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, "some", fileArray[i]);
-            }
-            return oznake;
-        }
-
-        
-    private void StartRecordsHost(string[] oznake) {
-
-            SListRequest lrq = new SListRequest();
-            SListResponse<SSlike> s = birokrat.Slike.List(new SListRequest());
-            List<SSlike> data = s.data;
+            List<SSlike> data = birokrat.GetAllSlike(company_year);
             for (int i = 0; i < oznake.Length; i++)
             {
-                SSlike slk = data.Where((x) =>  (x.Oznaka == oznake[i])).ToArray()[0];
+                SSlike slk = data.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
                 
-                StartingRecord record = new StartingRecord("16010264", "who", "cares", slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
-                string query = QueryStringConstants.MakeStartQueryString(record);
-                HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
+                StartingRecord record = new StartingRecord(company_id, company_id, company_year, slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
+                HttpResponseMessage msg = client.Start(record);
             }
         }
 
         private void AssertAllRecordsProcessed(string[] oznake) {
             foreach (string oznaka in oznake)
             {
-                entity_framework.InvoiceBuffer bufferRecord = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznaka)).ToArray()[0];
+                entity_framework.InvoiceBuffer bufferRecord = biroside.biroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznaka)).ToArray()[0];
                 AssertProcessed(bufferRecord);
             }
         }
@@ -119,22 +99,10 @@ namespace Tests
             Console.WriteLine("RihVatIdPublisher: " + buf.RihVatIdPublisher);
         }
 
-        private entity_framework.InvoiceBuffer GetNextRecord()
-        {
-            string query = QueryStringConstants.MakeGetNextQueryString(5);
-
-            HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
-            string content = msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
-            entity_framework.InvoiceBuffer ret = JsonConvert.DeserializeObject<entity_framework.InvoiceBuffer>(content);
-
-            return ret;
-        }
-
         private entity_framework.InvoiceBuffer AssertLocked(entity_framework.InvoiceBuffer rec)
         {
             string Oznaka = rec.Oznaka;
-            rec = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).First();
+            rec = biroside.biroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).First();
             if (rec.LockedBy != null && rec.LockedTime != null)
             {
                 Console.WriteLine("AssertLocked: Passed");
@@ -148,27 +116,26 @@ namespace Tests
         {
             // complete the record such that the fields prefixed by Finished are now filled with
             // data
-            rec.FinishedBy = 5; // your UserID
+            rec.FinishedBy = user_id; // your UserID
             rec.FinishedGross = rec.RihGross;
             rec.FinishedVat = rec.FinishedVat;
 
             // finish the record via the host
-            string content = JsonConvert.SerializeObject(rec);
-            QueryStringConstants.PostFinish(content, host);
+            client.Finish(rec);
         }
 
         private void AssertFinished(entity_framework.InvoiceBuffer rec)
         {
             string Oznaka = rec.Oznaka;
 
-            entity_framework.InvoiceBuffer[] array = contextBiroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).ToArray();
+            entity_framework.InvoiceBuffer[] array = biroside.biroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).ToArray();
             if (array.Length == 0) {
                 Console.WriteLine("AssertFinished-DeleteInvoiceBufferRecord: PASSED");
             } else {
                 throw new Exception("The invoice buffer was not deleted on finish!!!");
             }
 
-            BufferHistoryLog log = contextBiroside.BufferHistoryLog.Where((x) => (x.Oznaka == Oznaka)).First();
+            BufferHistoryLog log = biroside.biroside.BufferHistoryLog.Where((x) => (x.Oznaka == Oznaka)).First();
             if (log.FinishedBy != null && log.FinishedTime != null)
             {
                 Console.WriteLine("AssertFinished: Passed");

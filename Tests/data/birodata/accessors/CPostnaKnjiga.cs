@@ -11,7 +11,6 @@ namespace Tests.data.accessors {
         CDatabase database;
 
 		#region // constructor //
-		public CPostnaKnjiga() : base() { }
 		public CPostnaKnjiga(CDatabase database) {
             this.database = database;
         }
