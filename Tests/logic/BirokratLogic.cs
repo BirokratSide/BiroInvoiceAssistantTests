@@ -89,8 +89,9 @@ namespace Tests.logic
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
 
             // add new records into the database
-            string[] oznake = new string[fileArray.Length];
-            for (int i = 0; i < fileArray.Length; i++)
+            int num_recs = 20;
+            string[] oznake = new string[num_recs];
+            for (int i = 0; i < num_recs; i++)
             {
                 string date = DateTime.Now.ToString("ddMMyy") + "0000";
                 oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, company_year, fileArray[i]);
