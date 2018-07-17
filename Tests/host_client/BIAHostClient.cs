@@ -28,6 +28,26 @@ namespace Tests.host_client
             };
         }
 
+        #region [configuration]
+        public void SetUnlockedThreshold(int seconds)
+        {
+            string query = QueryStringConstants.MakeUnlockedThresholdString(seconds);
+            host.GetAsync(query);
+        }
+
+        public void SetLockedThreshold(int seconds)
+        {
+            string query = QueryStringConstants.MakeLockedThresholdString(seconds);
+            host.GetAsync(query);
+        }
+
+        public void SetProcessAutomaticSwitch(bool val) {
+            string query = QueryStringConstants.MakeProcessAutomaticSwitchQueryString(val);
+            host.GetAsync(query);
+        }
+        #endregion
+
+        #region [api]
         public HttpResponseMessage Start(StartingRecord record) {
             string query = QueryStringConstants.MakeStartQueryString(record);
             HttpResponseMessage msg = host.GetAsync(query).GetAwaiter().GetResult();
@@ -46,6 +66,6 @@ namespace Tests.host_client
             string content = JsonConvert.SerializeObject(rec);
             return QueryStringConstants.PostFinish(content, host);
         }
-        
+        #endregion
     }
 }
