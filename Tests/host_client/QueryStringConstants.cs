@@ -9,7 +9,8 @@ namespace Tests.host_client
     static class QueryStringConstants
     {
         
-        private static string START_QUERY = "/api/invoice/start?database={0}&company_id={1}&company_year={2}&oznaka={3}&recno={4}&datum_vnosa={5}";
+        private static string START_QUERY = "/api/invoice/start?davcnastevilka={0}&company_year={1}&oznaka={2}&recno={3}&datum_vnosa={4}";
+        private static string REMOVE_FROM_QUEUE = "/api/invoice/remove?davcnastevilka={0}&company_year={1}&oznaka={2}&recno={3}&datum_vnosa={4}";
         private static string GET_NEXT_QUERY = "/api/invoice/get-next?user_id={0}";
         private static string SWITCH_QUERY = "/api/invoice/set-switch?val={0}";
         private static string LOCKED_QUERY = "/api/invoice/locked-threshold?seconds={0}";
@@ -32,6 +33,10 @@ namespace Tests.host_client
         #region [api]
         public static string MakeStartQueryString(StartingRecord rec) {
             return String.Format(START_QUERY, rec.database, rec.company_id, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
+        }
+
+        public static string MakeRemoveFromQueueQueryString(StartingRecord rec) {
+            return String.Format(REMOVE_FROM_QUEUE, rec.database, rec.company_id, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
         }
 
         public static string MakeGetNextQueryString(int user_id) {
