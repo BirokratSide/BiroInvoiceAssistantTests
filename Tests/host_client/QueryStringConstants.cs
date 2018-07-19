@@ -32,11 +32,11 @@ namespace Tests.host_client
 
         #region [api]
         public static string MakeStartQueryString(StartingRecord rec) {
-            return String.Format(START_QUERY, rec.database, rec.company_id, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
+            return String.Format(START_QUERY, rec.davcnastevilka, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
         }
 
         public static string MakeRemoveFromQueueQueryString(StartingRecord rec) {
-            return String.Format(REMOVE_FROM_QUEUE, rec.database, rec.company_id, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
+            return String.Format(REMOVE_FROM_QUEUE, rec.davcnastevilka, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
         }
 
         public static string MakeGetNextQueryString(int user_id) {
