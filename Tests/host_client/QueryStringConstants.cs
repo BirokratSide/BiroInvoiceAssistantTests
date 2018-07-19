@@ -16,20 +16,6 @@ namespace Tests.host_client
         private static string LOCKED_QUERY = "/api/invoice/locked-threshold?seconds={0}";
         private static string UNLOCKED_QUERY = "/api/invoice/unlocked-threshold?seconds={0}";
 
-        #region [configuration]
-        public static string MakeLockedThresholdString(int seconds) {
-            return String.Format(LOCKED_QUERY, seconds);
-        }
-
-        public static string MakeUnlockedThresholdString(int seconds) {
-            return String.Format(UNLOCKED_QUERY, seconds);
-        }
-
-        public static string MakeProcessAutomaticSwitchQueryString(bool val) {
-            return String.Format(SWITCH_QUERY, val);
-        }
-        #endregion
-
         #region [api]
         public static string MakeStartQueryString(StartingRecord rec) {
             return String.Format(START_QUERY, rec.davcnastevilka, rec.company_year, rec.oznaka, rec.recno, rec.datum_vnosa);
@@ -48,6 +34,23 @@ namespace Tests.host_client
             StringContent contentStr = new StringContent(content, Encoding.UTF8, "application/json");
             var msg = client.PostAsync(query, contentStr).GetAwaiter().GetResult();
             return msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region [configuration]
+        public static string MakeLockedThresholdString(int seconds)
+        {
+            return String.Format(LOCKED_QUERY, seconds);
+        }
+
+        public static string MakeUnlockedThresholdString(int seconds)
+        {
+            return String.Format(UNLOCKED_QUERY, seconds);
+        }
+
+        public static string MakeProcessAutomaticSwitchQueryString(bool val)
+        {
+            return String.Format(SWITCH_QUERY, val);
         }
         #endregion
     }
