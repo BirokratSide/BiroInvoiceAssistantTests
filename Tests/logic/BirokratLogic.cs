@@ -89,7 +89,7 @@ namespace Tests.logic
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
 
             // add new records into the database
-            int num_recs = 3;
+            int num_recs = Configuration.GetValue<int>("Testing:NumCases");
             string[] oznake = new string[num_recs];
             for (int i = 0; i < num_recs; i++)
             {

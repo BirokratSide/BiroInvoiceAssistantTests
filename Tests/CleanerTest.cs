@@ -73,7 +73,7 @@ namespace Tests
             {
                 SSlike slk = data.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
 
-                StartingRecord record = new StartingRecord(company_id, company_id, company_year, slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
+                StartingRecord record = new StartingRecord(company_id, company_year, slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
                 HttpResponseMessage msg = client.Start(record);
             }
         }

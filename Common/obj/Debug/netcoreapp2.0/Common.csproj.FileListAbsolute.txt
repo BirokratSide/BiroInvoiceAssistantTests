@@ -6,3 +6,4 @@ C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netc
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfo.cs
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.dll
 C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.pdb
+C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Common\obj\Debug\netcoreapp2.0\Common.csprojAssemblyReference.cache
