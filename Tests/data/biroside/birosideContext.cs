@@ -10,7 +10,6 @@ namespace Tests.entity_framework
 {
     public partial class birosideContext : DbContext
     {
-
         IConfiguration Configuration;
         string ConnectionString;
 
@@ -58,6 +57,7 @@ namespace Tests.entity_framework
         }
 
         public virtual DbSet<BufferHistoryLog> BufferHistoryLog { get; set; }
+        public virtual DbSet<InvoiceBacklog> InvoiceBacklog { get; set; }
         public virtual DbSet<InvoiceBuffer> InvoiceBuffer { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -219,92 +219,92 @@ namespace Tests.entity_framework
 
                 entity.Property(e => e.RihGross)
                     .HasColumnName("rih_gross")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihGross0)
                     .HasColumnName("rih_gross_0")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihGrossM)
                     .HasColumnName("rih_gross_M")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihGrossV)
                     .HasColumnName("rih_gross_V")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihInvDate)
                     .HasColumnName("rih_inv_date")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihInvNum)
                     .HasColumnName("rih_inv_num")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihNet)
                     .HasColumnName("rih_net")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihNet0)
                     .HasColumnName("rih_net_0")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihNetM)
                     .HasColumnName("rih_net_M")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihNetV)
                     .HasColumnName("rih_net_V")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihPayUntil)
                     .HasColumnName("rih_pay_until")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihReference)
                     .HasColumnName("rih_reference")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihVat)
                     .HasColumnName("rih_vat")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihVat0)
                     .HasColumnName("rih_vat_0")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihVatIdBuyer)
                     .HasColumnName("rih_vat_id_buyer")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihVatIdPublisher)
                     .HasColumnName("rih_vat_id_publisher")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihVatM)
                     .HasColumnName("rih_vat_M")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.RihVatV)
                     .HasColumnName("rih_vat_V")
-                    .HasMaxLength(30)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.StartTime)
@@ -322,6 +322,55 @@ namespace Tests.entity_framework
                     .HasColumnName("vrsta")
                     .HasMaxLength(20)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<InvoiceBacklog>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CompanyId)
+                    .IsRequired()
+                    .HasColumnName("company_id")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompanyYearId)
+                    .IsRequired()
+                    .HasColumnName("company_year_id")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DatumVnosa)
+                    .IsRequired()
+                    .HasColumnName("datum_vnosa")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DeletedTime)
+                    .HasColumnName("deleted_time")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.FinishedTime)
+                    .HasColumnName("finished_time")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Oznaka)
+                    .IsRequired()
+                    .HasColumnName("oznaka")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RecNo)
+                    .IsRequired()
+                    .HasColumnName("rec_no")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StartTime)
+                    .HasColumnName("start_time")
+                    .HasColumnType("datetime");
             });
 
             modelBuilder.Entity<InvoiceBuffer>(entity =>

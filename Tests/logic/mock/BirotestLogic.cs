@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 using Tests.birotest;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tests.logic
 {
@@ -16,23 +18,27 @@ namespace Tests.logic
         }
 
         public void DeleteAllRecordsFromDatabase() {
-            // remove all partners
-            context.Partner.RemoveRange(context.Partner);
-            // remove all options
-            context.CrmstrankeOpcije.RemoveRange(context.CrmstrankeOpcije);
+            Partner[] arrp = context.Partner.Where((x) => (int.Parse(x.Sifra) > -1)).ToArray();
+            context.Partner.RemoveRange(arrp);
+
+            CrmstrankeOpcije[] arro = context.CrmstrankeOpcije.Where((x) => (x.Aplikacija == "RIH")).ToArray();
+            context.CrmstrankeOpcije.RemoveRange(arro);
+
+            context.SaveChanges();
         }
 
         public void InsertPartner(string sifra, string davcnaStevilka) {
             Partner partner = new Partner();
             partner.Sifra = sifra;
             partner.DavcnaStevilka = davcnaStevilka;
-            context.Add(partner);
+            context.Partner.Add(partner);
             context.SaveChanges();
         }
 
         public void InsertOpcija(string sifra, bool rih, string rihd, float rihk, float rihz, int rihc, string rihp) {
             // insert all of these options for the specified partner
-            CrmstrankeOpcije opcija = GetOpcija(sifra, "RIH", rih.ToString());
+            CrmstrankeOpcije opcija;
+            opcija = GetOpcija(sifra, "RIH", rih.ToString());
             context.CrmstrankeOpcije.Add(opcija);
             opcija = GetOpcija(sifra, "RIHD", rihd);
             context.CrmstrankeOpcije.Add(opcija);

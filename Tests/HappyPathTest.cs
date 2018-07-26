@@ -27,6 +27,7 @@ namespace Tests
         BIAHostClient client;
         BirokratLogic birokrat;
         BirosideLogic biroside;
+        IBirotestLogic birotest;
 
         string company_id;
         string company_year;
@@ -42,6 +43,7 @@ namespace Tests
             client = new BIAHostClient();
             birokrat = new BirokratLogic();
             biroside = new BirosideLogic();
+            birotest = new BirotestLogic(); // change implementation soon
             company_id = Configuration.GetValue<string>("Database:company_id");
             company_year = Configuration.GetValue<string>("Database:company_year");
             user_id = 5;
@@ -49,9 +51,18 @@ namespace Tests
 
         public void Start()
         {
+            // delete records from all databases
             birokrat.DeleteAllTestRecords(company_year);
             biroside.DeleteAllTestRecords(company_year);
+            birotest.DeleteAllRecordsFromDatabase();
+
+            // add test records to knjiga poste and slike
             string[] oznake = birokrat.AddTestRecordsToDatabase(company_year);
+
+            // add test records for credits
+            birotest.InsertPartner("1", "16010264");
+            birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 0.20f, 0.10f, 0, "");
+
 
             StartRecordsHost(oznake);
 
@@ -63,7 +74,7 @@ namespace Tests
             for (int i = 0; i < oznake.Length; i++) {
                 entity_framework.InvoiceBuffer buf = client.Next(user_id);
                 //buf = AssertLocked(buf);
-
+                
                 FinishRecord(buf);
                 //AssertFinished(buf);
             }
@@ -75,6 +86,7 @@ namespace Tests
             List<SSlike> data = birokrat.GetAllSlike(company_year);
             for (int i = 0; i < oznake.Length; i++)
             {
+                Thread.Sleep(5000);
                 SSlike slk = data.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
                 
                 StartingRecord record = new StartingRecord(company_id, company_year, slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);

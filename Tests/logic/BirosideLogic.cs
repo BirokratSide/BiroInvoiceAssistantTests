@@ -31,6 +31,9 @@ namespace Tests.logic
             BufferHistoryLog[] hists = biroside.BufferHistoryLog.Where((x) => (x.CompanyYearId == company_year)).ToArray();
             biroside.BufferHistoryLog.RemoveRange(hists);
 
+            InvoiceBacklog[] backs = biroside.InvoiceBacklog.Where((x) => (x.CompanyYearId == company_year)).ToArray();
+            biroside.InvoiceBacklog.RemoveRange(backs);
+
             biroside.SaveChanges();
         }
     }

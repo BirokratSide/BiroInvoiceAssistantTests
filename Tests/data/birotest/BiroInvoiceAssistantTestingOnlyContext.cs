@@ -43,7 +43,7 @@ namespace Tests.birotest
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
                                                  Configuration.GetValue<string>("Database:Address"),
-                                                 Configuration.GetValue<string>("Database:Database"),
+                                                 "BiroInvoiceAssistantTestingOnly",
                                                  Configuration.GetValue<string>("Database:Username"),
                                                  Configuration.GetValue<string>("Database:Password"));
             }
