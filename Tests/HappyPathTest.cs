@@ -66,6 +66,10 @@ namespace Tests
 
             StartRecordsHost(oznake);
 
+            birotest.DeleteAllRecordsFromDatabase();
+            birotest.InsertPartner("1", "16010264");
+            birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 1.00f, 1.00f, 0, "");
+
             Thread.Sleep(5000);
 
             
