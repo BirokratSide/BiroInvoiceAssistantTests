@@ -17,6 +17,8 @@ namespace Tests.data
         private CDatabase database;
         private CSlike slike = null;
         private CPostnaKnjiga postnaKnjiga = null;
+        private CPartner partner = null;
+        private CCRMStrankeOpcije crmStrankeOpcije = null;
 
         #region [properties]
         public CSlike Slike {
@@ -38,35 +40,60 @@ namespace Tests.data
                 return postnaKnjiga;
             }
         }
+
+        public CPartner Partner {
+            get
+            {
+                if (partner == null)
+                {
+                    partner = new CPartner(database);
+                }
+                return partner;
+            }
+        }
+
+        public CCRMStrankeOpcije CrmStrankeOpcije
+        {
+            get
+            {
+                if (crmStrankeOpcije == null)
+                {
+                    crmStrankeOpcije = new CCRMStrankeOpcije(database);
+                }
+                return crmStrankeOpcije;
+            }
+        }
         #endregion
 
-        public CBirokrat()
+        public CBirokrat(bool credits = false)
         {
             var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(@"C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\appsettings.json");
             Configuration = builder.Build();
 
+            string configname = "Database";
+            if (credits) configname = "CreditsDatabase";
 
             // host
-            string user = Configuration.GetValue<string>("Database:Username");
-            string pass = Configuration.GetValue<string>("Database:Password");
-            string address = Configuration.GetValue<string>("Database:Address");
+            string user = Configuration.GetValue<string>(String.Format("{0}:Username", configname));
+            string pass = Configuration.GetValue<string>(String.Format("{0}:Password", configname));
+            string address = Configuration.GetValue<string>(String.Format("{0}:Address", configname));
             string database = Configuration.GetValue<string>("Database:Database");
-            string intSec = Configuration.GetValue<string>("Database:IntegratedSecurity");
+            string intSec = Configuration.GetValue<string>(String.Format("{0}:IntegratedSecurity", configname));
             string initCat =  Configuration.GetValue<string>("Database:InitialCatalog");
 
             CMsSqlConnectionString sqlstring = new CMsSqlConnectionString();
-            sqlstring.username = Configuration.GetValue<string>("Database:Username");
-            sqlstring.password = Configuration.GetValue<string>("Database:Password");
-            sqlstring.server = Configuration.GetValue<string>("Database:Address");
+            sqlstring.username = Configuration.GetValue<string>(String.Format("{0}:Username", configname));
+            sqlstring.password = Configuration.GetValue<string>(String.Format("{0}:Password", configname));
+            sqlstring.server = Configuration.GetValue<string>(String.Format("{0}:Address", configname));
             sqlstring.database = Configuration.GetValue<string>("Database:Database");
             sqlstring.integratedSecurity = Configuration.GetValue<bool>("Database:IntegratedSecurity");
             CMsSqlConnection conn = new CMsSqlConnection((ISqlConnectionString)sqlstring);
             conn.autoOpenClose = true;
 
-            string biroCd = Configuration.GetValue<string>("Database:company_year");
-            string biroDb = Configuration.GetValue<string>("Database:company_id");
+            string biroCd = Configuration.GetValue<string>(String.Format("{0}:company_year", configname));
+            string biroDb = Configuration.GetValue<string>(String.Format("{0}:company_id", configname));
             this.database = new CDatabase(conn, biroCd, biroDb);
             
         }

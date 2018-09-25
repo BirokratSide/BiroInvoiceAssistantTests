@@ -43,7 +43,7 @@ namespace Tests
             client = new BIAHostClient();
             birokrat = new BirokratLogic();
             biroside = new BirosideLogic();
-            birotest = new BirotestLogic(); // change implementation soon
+            birotest = new BirocreditsLogic();
             company_id = Configuration.GetValue<string>("Database:company_id");
             company_year = Configuration.GetValue<string>("Database:company_year");
             user_id = 5;
