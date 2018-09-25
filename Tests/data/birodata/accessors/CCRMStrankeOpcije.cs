@@ -167,9 +167,8 @@ namespace Tests.data.accessors
             string nl = Environment.NewLine;
 
             sb.Append("insert into	[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije]" + nl);
-            sb.Append("				([Aktivno], [Aplikacija], [DatumVnosa], [Level], [Opcija], [OpisPolja], [Recno], [Sifra], [Vnasalec], [Vrednost], [Zaporedje], [YearCode]) " + nl);
-            sb.Append("values		(@Aktivno, @Aplikacija, @DatumVnosa, @Level, @Opcija, @OpisPolja, @Recno, @Sifra, @Vnasalec, @Vrednost, @Zaporedje, '" + database.BiroCd + "') " + nl);
-            sb.Append("select		ident_current('[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije]') as [RecNo] ");
+            sb.Append("				([Aktivno], [Aplikacija], [DatumVnosa], [Level], [Opcija], [OpisPolja], [Sifra], [Vnasalec], [Vrednost], [Zaporedje], [YearCode]) " + nl);
+            sb.Append("values		(@Aktivno, @Aplikacija, @DatumVnosa, @Level, @Opcija, @OpisPolja, @Sifra, @Vnasalec, @Vrednost, @Zaporedje, '" + database.BiroCd + "') " + nl);
 
             return sb.ToString();
         }
