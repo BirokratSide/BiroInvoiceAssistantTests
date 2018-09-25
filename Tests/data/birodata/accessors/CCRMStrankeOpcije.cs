@@ -167,8 +167,8 @@ namespace Tests.data.accessors
             string nl = Environment.NewLine;
 
             sb.Append("insert into	[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije]" + nl);
-            sb.Append("				([Aktivno], [Aplikacija], [DatumVnosa], [Level], [Opcija], [OpisPolja], [Recno], [Sifra], [Vnasalec], [Vrednost], [Zaporedje][YearCode]) " + nl);
-            sb.Append("values		(@Aktivno, @Aplikacija, @DatumVnosa, @Level, @Opcija, @OpisPolja, @Recno, @Sifra, @Vnasalec, @Vrednost, @Zaporedje'" + database.BiroCd + "') " + nl);
+            sb.Append("				([Aktivno], [Aplikacija], [DatumVnosa], [Level], [Opcija], [OpisPolja], [Recno], [Sifra], [Vnasalec], [Vrednost], [Zaporedje], [YearCode]) " + nl);
+            sb.Append("values		(@Aktivno, @Aplikacija, @DatumVnosa, @Level, @Opcija, @OpisPolja, @Recno, @Sifra, @Vnasalec, @Vrednost, @Zaporedje, '" + database.BiroCd + "') " + nl);
             sb.Append("select		ident_current('[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije]') as [RecNo] ");
 
             return sb.ToString();
@@ -189,7 +189,7 @@ namespace Tests.data.accessors
             sb.Append("			[Recno] = @Recno, " + nl);
             sb.Append("			[Sifra] = @Sifra, " + nl);
             sb.Append("			[Vnasalec] = @Vnasalec, " + nl);
-            sb.Append("			[Vrednost] = @Vrednost " + nl);
+            sb.Append("			[Vrednost] = @Vrednost, " + nl);
             sb.Append("			[Zaporedje] = @Zaporedje " + nl);
             sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
             sb.Append("				and [RecNo] = @RecNo ");

@@ -20,7 +20,10 @@ namespace Tests.logic
             // could be dangerous to delete partners so we'll just delete CRMStrankeOpcije where Aplication = 'RIH'
             Dictionary<string, string> WhereClauses = new Dictionary<string, string>();
             WhereClauses["Aplikacija"] = "RIH";
-            birokrat.CrmStrankeOpcije.List(new data.structs.SListRequest(), WhereClauses);
+            List<SCRMStrankeOpcije> lst = birokrat.CrmStrankeOpcije.List(new data.structs.SListRequest(), WhereClauses).data;
+            foreach (SCRMStrankeOpcije opcija in lst) {
+                birokrat.CrmStrankeOpcije.Delete(opcija);
+            }
         }
 
         public void InsertPartner(string sifra, string davcnaStevilka)
