@@ -126,8 +126,8 @@ namespace Tests.data.accessors {
 			string nl = Environment.NewLine;
 
 			sb.Append("delete " + nl);
-			sb.Append("from      [" + database.BiroDb + "].[dbo].[PostnaKnjiga] " + nl);
-			sb.Append("where     [YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("from      [" + database.biroDavcnaStevilka + "].[dbo].[PostnaKnjiga] " + nl);
+			sb.Append("where     [YearCode] = '" + database.companyYearCode + "' " + nl);
 			sb.Append("              and [RecNo] = @RecNo " + nl);
 			sb.Append("select    @@rowcount as [Count] ");
 
@@ -195,8 +195,8 @@ namespace Tests.data.accessors {
 			sb.Append("			[Rih_vat_id_publisher], " + nl);
 			sb.Append("			[Rih_vat_M], " + nl);
 			sb.Append("			[Rih_vat_V] " + nl);
-			sb.Append("from		[" + database.BiroDb + "].[dbo].[PostnaKnjiga] " + nl);
-			sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[PostnaKnjiga] " + nl);
+			sb.Append("where	[YearCode] = '" + database.companyYearCode + "' " + nl);
 			// TODO : other query conditions have to be added manually
 
 			return sb.ToString();
@@ -263,8 +263,8 @@ namespace Tests.data.accessors {
 			sb.Append("			[Rih_vat_id_publisher], " + nl);
 			sb.Append("			[Rih_vat_M], " + nl);
 			sb.Append("			[Rih_vat_V] " + nl);
-			sb.Append("from		[" + database.BiroDb + "].[dbo].[PostnaKnjiga] " + nl);
-			sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[PostnaKnjiga] " + nl);
+			sb.Append("where	[YearCode] = '" + database.companyYearCode + "' " + nl);
 			sb.Append("				and [RecNo] = @RecNo ");
 
 			return sb.ToString();
@@ -273,10 +273,10 @@ namespace Tests.data.accessors {
 			StringBuilder sb = new StringBuilder();
 			string nl = Environment.NewLine;
 
-			sb.Append("insert into	[" + database.BiroDb + "].[dbo].[PostnaKnjiga]" + nl);
+			sb.Append("insert into	[" + database.biroDavcnaStevilka + "].[dbo].[PostnaKnjiga]" + nl);
 			sb.Append("				([Datum], [DatumPotrditve], [DatumVnosa], [ImePartnerja], [Komentar], [Letalsko], [Nujno], [Odkupnina], [Postnina], [SifraPartnerja], [Sporocilo], [Teza], [Tip], [Vnasalec], [VrednostPoste], [VrstaPoste], [Zadeva], [Zaposlen], [ZapSt], [Datum1], [Datum2], [eSLOGGUID], [InternaStevilka], [MPO], [PE], [ScanPrenesen], [SlikeOznaka], [SlikeVrsta], [TipPoste], [ZZI], [ZZI1], [ZZI2], [Likvidacija], [Rih_DateTime_Received], [Rih_DateTime_Sent], [Rih_DateTime_Updated], [Rih_gross], [Rih_gross_0], [Rih_gross_M], [Rih_gross_V], [Rih_inv_date], [Rih_inv_num], [Rih_net], [Rih_net_0], [Rih_net_M], [Rih_net_V], [Rih_pay_until], [Rih_reference], [Rih_vat], [Rih_vat_0], [Rih_vat_id_buyer], [Rih_vat_id_publisher], [Rih_vat_M], [Rih_vat_V], [YearCode]) " + nl);
-			sb.Append("values		(@Datum, @DatumPotrditve, @DatumVnosa, @ImePartnerja, @Komentar, @Letalsko, @Nujno, @Odkupnina, @Postnina, @SifraPartnerja, @Sporocilo, @Teza, @Tip, @Vnasalec, @VrednostPoste, @VrstaPoste, @Zadeva, @Zaposlen, @ZapSt, @Datum1, @Datum2, @eSLOGGUID, @InternaStevilka, @MPO, @PE, @ScanPrenesen, @SlikeOznaka, @SlikeVrsta, @TipPoste, @ZZI, @ZZI1, @ZZI2, @Likvidacija, @Rih_DateTime_Received, @Rih_DateTime_Sent, @Rih_DateTime_Updated, @Rih_gross, @Rih_gross_0, @Rih_gross_M, @Rih_gross_V, @Rih_inv_date, @Rih_inv_num, @Rih_net, @Rih_net_0, @Rih_net_M, @Rih_net_V, @Rih_pay_until, @Rih_reference, @Rih_vat, @Rih_vat_0, @Rih_vat_id_buyer, @Rih_vat_id_publisher, @Rih_vat_M, @Rih_vat_V, '" + database.BiroCd + "') " + nl);
-			sb.Append("select		ident_current('[" + database.BiroDb + "].[dbo].[PostnaKnjiga]') as [RecNo] ");
+			sb.Append("values		(@Datum, @DatumPotrditve, @DatumVnosa, @ImePartnerja, @Komentar, @Letalsko, @Nujno, @Odkupnina, @Postnina, @SifraPartnerja, @Sporocilo, @Teza, @Tip, @Vnasalec, @VrednostPoste, @VrstaPoste, @Zadeva, @Zaposlen, @ZapSt, @Datum1, @Datum2, @eSLOGGUID, @InternaStevilka, @MPO, @PE, @ScanPrenesen, @SlikeOznaka, @SlikeVrsta, @TipPoste, @ZZI, @ZZI1, @ZZI2, @Likvidacija, @Rih_DateTime_Received, @Rih_DateTime_Sent, @Rih_DateTime_Updated, @Rih_gross, @Rih_gross_0, @Rih_gross_M, @Rih_gross_V, @Rih_inv_date, @Rih_inv_num, @Rih_net, @Rih_net_0, @Rih_net_M, @Rih_net_V, @Rih_pay_until, @Rih_reference, @Rih_vat, @Rih_vat_0, @Rih_vat_id_buyer, @Rih_vat_id_publisher, @Rih_vat_M, @Rih_vat_V, '" + database.companyYearCode + "') " + nl);
+			sb.Append("select		ident_current('[" + database.biroDavcnaStevilka + "].[dbo].[PostnaKnjiga]') as [RecNo] ");
 
 			return sb.ToString();
 		}
@@ -284,7 +284,7 @@ namespace Tests.data.accessors {
 			StringBuilder sb = new StringBuilder();
 			string nl = Environment.NewLine;
 
-			sb.Append("update	[" + database.BiroDb + "].[dbo].[PostnaKnjiga]" + nl);
+			sb.Append("update	[" + database.biroDavcnaStevilka + "].[dbo].[PostnaKnjiga]" + nl);
 			sb.Append("set " + nl);
 			sb.Append("			[Datum] = @Datum, " + nl);
 			sb.Append("			[DatumPotrditve] = @DatumPotrditve, " + nl);
@@ -340,7 +340,7 @@ namespace Tests.data.accessors {
 			sb.Append("			[Rih_vat_id_publisher] = @Rih_vat_id_publisher, " + nl);
 			sb.Append("			[Rih_vat_M] = @Rih_vat_M, " + nl);
 			sb.Append("			[Rih_vat_V] = @Rih_vat_V " + nl);
-			sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("where	[YearCode] = '" + database.companyYearCode + "' " + nl);
 			sb.Append("				and [RecNo] = @RecNo ");
 			sb.Append("if (@@rowcount > 0)	select @RecNo as [RecNo] " + nl);
 			sb.Append("else					select 0 as [RecNo] ");

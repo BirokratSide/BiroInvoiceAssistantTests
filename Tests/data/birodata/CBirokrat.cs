@@ -92,9 +92,11 @@ namespace Tests.data
             CMsSqlConnection conn = new CMsSqlConnection((ISqlConnectionString)sqlstring);
             conn.autoOpenClose = true;
 
-            string biroCd = Configuration.GetValue<string>(String.Format("{0}:company_year", configname));
+            string partner_company_year = Configuration.GetValue<string>(String.Format("{0}:partner_company_year", configname));
+            string options_company_year = Configuration.GetValue<string>(String.Format("{0}:options_company_year", configname));
+            string company_year_code = Configuration.GetValue<string>(String.Format("Database:company_year", configname));
             string biroDb = Configuration.GetValue<string>(String.Format("{0}:company_id", configname));
-            this.database = new CDatabase(conn, biroCd, biroDb);
+            this.database = new CDatabase(conn, partner_company_year, options_company_year, company_year_code, biroDb);
             
         }
     }

@@ -98,8 +98,8 @@ namespace Tests.data.accessors
             string nl = Environment.NewLine;
 
             sb.Append("delete " + nl);
-            sb.Append("from      [" + database.BiroDb + "].[dbo].[CRMStrankeOpcije] " + nl);
-            sb.Append("where     [YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("from      [" + database.biroDavcnaStevilka + "].[dbo].[CRMStrankeOpcije] " + nl);
+            sb.Append("where     [YearCode] = '" + database.optionsYearCode + "' " + nl);
             sb.Append("              and [RecNo] = @RecNo " + nl);
             sb.Append("select    @@rowcount as [Count] ");
 
@@ -124,8 +124,8 @@ namespace Tests.data.accessors
             sb.Append("			[Zaporedje], " + nl);
             sb.Append("			[SyncId], " + nl);
             sb.Append("			[YearCode] " + nl);
-            sb.Append("from		[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije] " + nl);
-            sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[CRMStrankeOpcije] " + nl);
+            sb.Append("where	[YearCode] = '" + database.optionsYearCode + "' " + nl);
 
             foreach (var key in WhereClauses.Keys)
             {
@@ -155,8 +155,8 @@ namespace Tests.data.accessors
             sb.Append("			[Zaporedje], " + nl);
             sb.Append("			[SyncId], " + nl);
             sb.Append("			[YearCode] " + nl);
-            sb.Append("from		[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije] " + nl);
-            sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[CRMStrankeOpcije] " + nl);
+            sb.Append("where	[YearCode] = '" + database.optionsYearCode + "' " + nl);
             sb.Append("				and [RecNo] = @RecNo ");
 
             return sb.ToString();
@@ -166,9 +166,9 @@ namespace Tests.data.accessors
             StringBuilder sb = new StringBuilder();
             string nl = Environment.NewLine;
 
-            sb.Append("insert into	[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije]" + nl);
+            sb.Append("insert into	[" + database.biroDavcnaStevilka + "].[dbo].[CRMStrankeOpcije]" + nl);
             sb.Append("				([Aktivno], [Aplikacija], [DatumVnosa], [Level], [Opcija], [OpisPolja], [Sifra], [Vnasalec], [Vrednost], [Zaporedje], [YearCode]) " + nl);
-            sb.Append("values		(@Aktivno, @Aplikacija, @DatumVnosa, @Level, @Opcija, @OpisPolja, @Sifra, @Vnasalec, @Vrednost, @Zaporedje, '" + database.BiroCd + "') " + nl);
+            sb.Append("values		(@Aktivno, @Aplikacija, @DatumVnosa, @Level, @Opcija, @OpisPolja, @Sifra, @Vnasalec, @Vrednost, @Zaporedje, '" + database.optionsYearCode + "') " + nl);
 
             return sb.ToString();
         }
@@ -177,7 +177,7 @@ namespace Tests.data.accessors
             StringBuilder sb = new StringBuilder();
             string nl = Environment.NewLine;
 
-            sb.Append("update	[" + database.BiroDb + "].[dbo].[CRMStrankeOpcije]" + nl);
+            sb.Append("update	[" + database.biroDavcnaStevilka + "].[dbo].[CRMStrankeOpcije]" + nl);
             sb.Append("set " + nl);
             sb.Append("			[Aktivno] = @Aktivno, " + nl);
             sb.Append("			[Aplikacija] = @Aplikacija, " + nl);
@@ -190,7 +190,7 @@ namespace Tests.data.accessors
             sb.Append("			[Vnasalec] = @Vnasalec, " + nl);
             sb.Append("			[Vrednost] = @Vrednost, " + nl);
             sb.Append("			[Zaporedje] = @Zaporedje " + nl);
-            sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("where	[YearCode] = '" + database.optionsYearCode + "' " + nl);
             sb.Append("				and [RecNo] = @RecNo ");
             sb.Append("if (@@rowcount > 0)	select @RecNo as [RecNo] " + nl);
             sb.Append("else					select 0 as [RecNo] ");

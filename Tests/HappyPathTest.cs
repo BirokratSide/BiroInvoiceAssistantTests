@@ -27,9 +27,11 @@ namespace Tests
         BIAHostClient client;
         BirokratLogic birokrat;
         BirosideLogic biroside;
-        IBirotestLogic birotest;
+        IBirocreditsLogic birotest;
 
         string company_id;
+        string options_company_year;
+        string partner_company_year;
         string company_year;
         int user_id;
 
@@ -46,6 +48,8 @@ namespace Tests
             birotest = new BirocreditsLogic();
             company_id = Configuration.GetValue<string>("Database:company_id");
             company_year = Configuration.GetValue<string>("Database:company_year");
+            options_company_year = Configuration.GetValue<string>("CreditsDatabase:options_company_year");
+            partner_company_year = Configuration.GetValue<string>("CreditsDatabase:partner_company_year");
             user_id = 5;
         }
 
@@ -54,34 +58,34 @@ namespace Tests
             // delete records from all databases
             birokrat.DeleteAllTestRecords(company_year);
             biroside.DeleteAllTestRecords(company_year);
-            birotest.DeleteAllRecordsFromDatabase();
+            //birotest.DeleteAllRecordsFromDatabase();
 
             // add test records to knjiga poste and slike
-            string[] oznake = birokrat.AddTestRecordsToDatabase(company_year);
+            string[] oznake = birokrat.AddTestRecordsToDatabase(company_year, "Avansni Racun");
 
             // add test records for credits
-            birotest.InsertPartner("1", "16010264");
-            birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 0.20f, 0.10f, 0, "");
+            birotest.InsertPartner("1", company_id);
+            birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 5.20f, 5.10f, 0, "");
 
 
             StartRecordsHost(oznake);
 
-            birotest.DeleteAllRecordsFromDatabase();
-            birotest.InsertPartner("1", "16010264");
-            birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 1.00f, 1.00f, 0, "");
+            //birotest.DeleteAllRecordsFromDatabase();
+            //birotest.InsertPartner("1", "16010264");
+            //birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 1.00f, 1.00f, 0, "");
 
             Thread.Sleep(5000);
 
             
             //AssertAllRecordsProcessed(oznake);
 
-            for (int i = 0; i < oznake.Length; i++) {
+            /*for (int i = 0; i < oznake.Length; i++) {
                 entity_framework.InvoiceBuffer buf = client.Next(user_id);
                 //buf = AssertLocked(buf);
                 
                 FinishRecord(buf);
                 //AssertFinished(buf);
-            }
+            }*/
         }
 
         #region [private]

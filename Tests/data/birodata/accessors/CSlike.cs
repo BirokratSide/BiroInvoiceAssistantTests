@@ -78,8 +78,8 @@ namespace Tests.data.accessors {
 			string nl = Environment.NewLine;
 
 			sb.Append("delete " + nl);
-			sb.Append("from      [" + database.BiroDb + "].[dbo].[Slike] " + nl);
-			sb.Append("where     [YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("from      [" + database.biroDavcnaStevilka + "].[dbo].[Slike] " + nl);
+			sb.Append("where     [YearCode] = '" + database.companyYearCode + "' " + nl);
 			sb.Append("              and [RecNo] = @RecNo " + nl);
 			sb.Append("select    @@rowcount as [Count] ");
 
@@ -100,8 +100,8 @@ namespace Tests.data.accessors {
 			sb.Append("			[Komentar], " + nl);
 			sb.Append("			[SyncId], " + nl);
 			sb.Append("			[YearCode] " + nl);
-			sb.Append("from		[" + database.BiroDb + "].[dbo].[Slike] " + nl);
-			sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[Slike] " + nl);
+			sb.Append("where	[YearCode] = '" + database.companyYearCode + "' " + nl);
 			// TODO : other query conditions have to be added manually
 
 			return sb.ToString();
@@ -121,8 +121,8 @@ namespace Tests.data.accessors {
 			sb.Append("			[Komentar], " + nl);
 			sb.Append("			[SyncId], " + nl);
 			sb.Append("			[YearCode] " + nl);
-			sb.Append("from		[" + database.BiroDb + "].[dbo].[Slike] " + nl);
-			sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[Slike] " + nl);
+			sb.Append("where	[YearCode] = '" + database.companyYearCode + "' " + nl);
 			sb.Append("				and [RecNo] = @RecNo ");
 
 			return sb.ToString();
@@ -131,10 +131,10 @@ namespace Tests.data.accessors {
 			StringBuilder sb = new StringBuilder();
 			string nl = Environment.NewLine;
 
-			sb.Append("insert into	[" + database.BiroDb + "].[dbo].[Slike]" + nl);
+			sb.Append("insert into	[" + database.biroDavcnaStevilka + "].[dbo].[Slike]" + nl);
 			sb.Append("				([Datum], [DatumVnosa], [Oznaka], [Vnasalec], [Vrsta], [Vsebina], [Komentar], [YearCode]) " + nl);
-			sb.Append("values		(@Datum, @DatumVnosa, @Oznaka, @Vnasalec, @Vrsta, @Vsebina, @Komentar, '" + database.BiroCd + "') " + nl);
-			sb.Append("select		ident_current('[" + database.BiroDb + "].[dbo].[Slike]') as [RecNo] ");
+			sb.Append("values		(@Datum, @DatumVnosa, @Oznaka, @Vnasalec, @Vrsta, @Vsebina, @Komentar, '" + database.companyYearCode + "') " + nl);
+			sb.Append("select		ident_current('[" + database.biroDavcnaStevilka + "].[dbo].[Slike]') as [RecNo] ");
 
 			return sb.ToString();
 		}
@@ -142,7 +142,7 @@ namespace Tests.data.accessors {
 			StringBuilder sb = new StringBuilder();
 			string nl = Environment.NewLine;
 
-			sb.Append("update	[" + database.BiroDb + "].[dbo].[Slike]" + nl);
+			sb.Append("update	[" + database.biroDavcnaStevilka + "].[dbo].[Slike]" + nl);
 			sb.Append("set " + nl);
 			sb.Append("			[Datum] = @Datum, " + nl);
 			sb.Append("			[DatumVnosa] = @DatumVnosa, " + nl);
@@ -151,7 +151,7 @@ namespace Tests.data.accessors {
 			sb.Append("			[Vrsta] = @Vrsta, " + nl);
 			sb.Append("			[Vsebina] = @Vsebina, " + nl);
 			sb.Append("			[Komentar] = @Komentar " + nl);
-			sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+			sb.Append("where	[YearCode] = '" + database.companyYearCode + "' " + nl);
 			sb.Append("				and [RecNo] = @RecNo ");
 			sb.Append("if (@@rowcount > 0)	select @RecNo as [RecNo] " + nl);
 			sb.Append("else					select 0 as [RecNo] ");

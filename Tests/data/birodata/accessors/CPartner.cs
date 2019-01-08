@@ -269,8 +269,8 @@ namespace Tests.data.accessors
             string nl = Environment.NewLine;
 
             sb.Append("delete " + nl);
-            sb.Append("from      [" + database.BiroDb + "].[dbo].[Partner] " + nl);
-            sb.Append("where     [YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("from      [" + database.biroDavcnaStevilka + "].[dbo].[Partner] " + nl);
+            sb.Append("where     [YearCode] = '" + database.partnerYearCode + "' " + nl);
             sb.Append("              and [RecNo] = @RecNo " + nl);
             sb.Append("select    @@rowcount as [Count] ");
 
@@ -284,8 +284,8 @@ namespace Tests.data.accessors
             sb.Append("select " + nl);
             sb.Append("			[Sifra], " + nl);
             sb.Append("			[YearCode] " + nl);
-            sb.Append("from		[" + database.BiroDb + "].[dbo].[Partner] " + nl);
-            sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[Partner] " + nl);
+            sb.Append("where	[YearCode] = '" + database.partnerYearCode + "' " + nl);
 
             foreach (var key in WhereClauses.Keys)
             {
@@ -302,8 +302,8 @@ namespace Tests.data.accessors
             sb.Append("select " + nl);
             sb.Append("			[Sifra], " + nl);
             sb.Append("			[YearCode] " + nl);
-            sb.Append("from		[" + database.BiroDb + "].[dbo].[Partner] " + nl);
-            sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[Partner] " + nl);
+            sb.Append("where	[YearCode] = '" + database.partnerYearCode + "' " + nl);
             sb.Append("				and [RecNo] = @RecNo ");
 
             return sb.ToString();
@@ -313,10 +313,10 @@ namespace Tests.data.accessors
             StringBuilder sb = new StringBuilder();
             string nl = Environment.NewLine;
 
-            sb.Append("insert into	[" + database.BiroDb + "].[dbo].[Partner]" + nl);
+            sb.Append("insert into	[" + database.biroDavcnaStevilka + "].[dbo].[Partner]" + nl);
             sb.Append("				([AlternativnaImena], [BarkodaeSLOG], [BICKoda], [Cena1], [Cena2], [Cena3], [Cena4], [ClanaVpisal], [ClanDatumVpisa], [ClanDo], [ClanskaStevilka], [Custom1], [Custom2], [Custom3], [Custom4], [Custom5], [DatumKonca], [DatumNastopa], [DatumRojstva], [DatumVnosa], [DavcnaIzpostava], [DavcnaStevilka], [DDV], [DelovnaDoba], [DelovnoDovoljenjeST], [DelovnoMesto], [Detacirani], [DirektorijPriloge], [Dodatek1], [Dodatek2], [Dodatek3], [Dodatek4], [Dodatno1], [Dodatno2], [Dopust], [DovoljenjeIzdanoDne], [DovoljenjeVeljaDO], [DovoljenjeVeljaOD], [DrugiDelodajalec], [Drzava], [DrzavaDetasirani], [DrzavaRezidenstva], [Drzavljanstvo], [DvigniCenoZaRabat], [Email], [EMSO], [eSLOG], [Fax], [GLNKoda], [H_ST], [HitraOpomba], [Hotelir], [IDStevilka], [IME], [InternetDa], [Invalid], [InvalidNadKvoto], [IzkorisceniDopust], [JeKontakt], [Komentar1], [Komentar2], [KomentarPopusta], [KomentarZnizanjaTakse], [Komercialist], [KonkurencnaKlavzula], [Konsignatar], [Kontakt], [Kraj], [KrajRojstva], [KrajZacasnegaBivalisca], [LetnaNarocilnica], [MamicaDo3Leta], [MaticnaStevilka], [Mesto], [NacinProdaje], [Naziv], [Nerezident], [NeUporabljaj], [NeUpostevajZaIOP], [NoceUPenzijo], [ObcinaBivanja], [Obrazec], [OdjavljenIzZZZS], [OdprtPri], [OmejitevNeplacano], [OmejitevZapadlo], [OmogociPlaciloZDobavnico], [Opombe], [OpozoriloZaRacun], [OpozoriUporabnik], [OpozoriZapadlo], [OsebnaIzkaznica], [Otroci], [OZNAKA], [Partner], [Partner1], [PE], [PlacilniRok], [PlacilniRokNaOdpremo], [Pogodba], [PogodbaOPoslovodenju], [Poklic], [Popust], [Posta], [PostaZacasnegaBivalisca], [PotniList], [PotniListDatum], [PotniListDo], [PotniListOd], [PovecanaDobaProcent], [PovecanaSplosnaOlajsava], [PravniStatus], [PrenesenoIzPOSa], [PreostaliDopust], [PRIIMEK], [PrijavljenNaZZZS], [RabatGeneralno], [RabatnaSkupina], [Rojen], [RojenVKraju], [Sifra], [SifraDrzave], [SifraDrzaveNaslova], [SifraPojavnegaStatusa], [SKIS], [Sklic], [Skupina], [Spol], [Sprememba], [Stalnost], [StalnostTrenutno], [StevilkaOsebnegaDokumenta], [StevilkaRacuna], [Stimulac], [StopnjaIzobrazbe], [SuperRabat], [Telefon], [Telefon2], [TempCena1], [TempCena2], [TempCena3], [TezavnostDela], [TKDIS], [Ulica], [VarnostPriDelu], [VarnostPriDeluST], [VarnostPriDeluVeljaDO], [VarnostPriDeluVeljaOD], [Viza], [VizaDatum], [VizaDO], [VizaOD], [VIzvrsbi], [VIzvrsbiOd], [Vnasalec], [VnesenoNaPOSu], [Vrsta], [VrstaHonorarja], [VrstaIzplacila], [VrstaNaslova], [VrstaOsebe], [VrstaOsebnegaDokumenta], [VrstaPoslaZBS], [VrstaUre], [VrstaZaposlitve], [VzdrzevaniOdrasli], [ZacasnoBivalisce], [Zaposlen], [ZdravstveniPregled], [ZdravstveniPregledST], [ZdravstveniPregledVeljaDO], [ZdravstveniPregledVeljaOD], [Ziro_Racun], [Ziro_Racun1], [Ziro_Racun2], [ZnizanjeTakse], [AlterTelefon], [MladiDo30], [PogodbaOPoslovodenju2014_18Clen], [SP1LetoOprostitev30], [SP1LetoOprostitev50], [SP1OdMinimalne2014], [YearCode]) " + nl);
-            sb.Append("values		(@AlternativnaImena, @BarkodaeSLOG, @BICKoda, @Cena1, @Cena2, @Cena3, @Cena4, @ClanaVpisal, @ClanDatumVpisa, @ClanDo, @ClanskaStevilka, @Custom1, @Custom2, @Custom3, @Custom4, @Custom5, @DatumKonca, @DatumNastopa, @DatumRojstva, @DatumVnosa, @DavcnaIzpostava, @DavcnaStevilka, @DDV, @DelovnaDoba, @DelovnoDovoljenjeST, @DelovnoMesto, @Detacirani, @DirektorijPriloge, @Dodatek1, @Dodatek2, @Dodatek3, @Dodatek4, @Dodatno1, @Dodatno2, @Dopust, @DovoljenjeIzdanoDne, @DovoljenjeVeljaDO, @DovoljenjeVeljaOD, @DrugiDelodajalec, @Drzava, @DrzavaDetasirani, @DrzavaRezidenstva, @Drzavljanstvo, @DvigniCenoZaRabat, @Email, @EMSO, @eSLOG, @Fax, @GLNKoda, @H_ST, @HitraOpomba, @Hotelir, @IDStevilka, @IME, @InternetDa, @Invalid, @InvalidNadKvoto, @IzkorisceniDopust, @JeKontakt, @Komentar1, @Komentar2, @KomentarPopusta, @KomentarZnizanjaTakse, @Komercialist, @KonkurencnaKlavzula, @Konsignatar, @Kontakt, @Kraj, @KrajRojstva, @KrajZacasnegaBivalisca, @LetnaNarocilnica, @MamicaDo3Leta, @MaticnaStevilka, @Mesto, @NacinProdaje, @Naziv, @Nerezident, @NeUporabljaj, @NeUpostevajZaIOP, @NoceUPenzijo, @ObcinaBivanja, @Obrazec, @OdjavljenIzZZZS, @OdprtPri, @OmejitevNeplacano, @OmejitevZapadlo, @OmogociPlaciloZDobavnico, @Opombe, @OpozoriloZaRacun, @OpozoriUporabnik, @OpozoriZapadlo, @OsebnaIzkaznica, @Otroci, @OZNAKA, @Partner, @Partner1, @PE, @PlacilniRok, @PlacilniRokNaOdpremo, @Pogodba, @PogodbaOPoslovodenju, @Poklic, @Popust, @Posta, @PostaZacasnegaBivalisca, @PotniList, @PotniListDatum, @PotniListDo, @PotniListOd, @PovecanaDobaProcent, @PovecanaSplosnaOlajsava, @PravniStatus, @PrenesenoIzPOSa, @PreostaliDopust, @PRIIMEK, @PrijavljenNaZZZS, @RabatGeneralno, @RabatnaSkupina, @Rojen, @RojenVKraju, @Sifra, @SifraDrzave, @SifraDrzaveNaslova, @SifraPojavnegaStatusa, @SKIS, @Sklic, @Skupina, @Spol, @Sprememba, @Stalnost, @StalnostTrenutno, @StevilkaOsebnegaDokumenta, @StevilkaRacuna, @Stimulac, @StopnjaIzobrazbe, @SuperRabat, @Telefon, @Telefon2, @TempCena1, @TempCena2, @TempCena3, @TezavnostDela, @TKDIS, @Ulica, @VarnostPriDelu, @VarnostPriDeluST, @VarnostPriDeluVeljaDO, @VarnostPriDeluVeljaOD, @Viza, @VizaDatum, @VizaDO, @VizaOD, @VIzvrsbi, @VIzvrsbiOd, @Vnasalec, @VnesenoNaPOSu, @Vrsta, @VrstaHonorarja, @VrstaIzplacila, @VrstaNaslova, @VrstaOsebe, @VrstaOsebnegaDokumenta, @VrstaPoslaZBS, @VrstaUre, @VrstaZaposlitve, @VzdrzevaniOdrasli, @ZacasnoBivalisce, @Zaposlen, @ZdravstveniPregled, @ZdravstveniPregledST, @ZdravstveniPregledVeljaDO, @ZdravstveniPregledVeljaOD, @Ziro_Racun, @Ziro_Racun1, @Ziro_Racun2, @ZnizanjeTakse, @AlterTelefon, @MladiDo30, @PogodbaOPoslovodenju2014_18Clen, @SP1LetoOprostitev30, @SP1LetoOprostitev50, @SP1OdMinimalne2014, '" + database.BiroCd + "') " + nl);
-            sb.Append("select		ident_current('[" + database.BiroDb + "].[dbo].[Partner]') as [RecNo] ");
+            sb.Append("values		(@AlternativnaImena, @BarkodaeSLOG, @BICKoda, @Cena1, @Cena2, @Cena3, @Cena4, @ClanaVpisal, @ClanDatumVpisa, @ClanDo, @ClanskaStevilka, @Custom1, @Custom2, @Custom3, @Custom4, @Custom5, @DatumKonca, @DatumNastopa, @DatumRojstva, @DatumVnosa, @DavcnaIzpostava, @DavcnaStevilka, @DDV, @DelovnaDoba, @DelovnoDovoljenjeST, @DelovnoMesto, @Detacirani, @DirektorijPriloge, @Dodatek1, @Dodatek2, @Dodatek3, @Dodatek4, @Dodatno1, @Dodatno2, @Dopust, @DovoljenjeIzdanoDne, @DovoljenjeVeljaDO, @DovoljenjeVeljaOD, @DrugiDelodajalec, @Drzava, @DrzavaDetasirani, @DrzavaRezidenstva, @Drzavljanstvo, @DvigniCenoZaRabat, @Email, @EMSO, @eSLOG, @Fax, @GLNKoda, @H_ST, @HitraOpomba, @Hotelir, @IDStevilka, @IME, @InternetDa, @Invalid, @InvalidNadKvoto, @IzkorisceniDopust, @JeKontakt, @Komentar1, @Komentar2, @KomentarPopusta, @KomentarZnizanjaTakse, @Komercialist, @KonkurencnaKlavzula, @Konsignatar, @Kontakt, @Kraj, @KrajRojstva, @KrajZacasnegaBivalisca, @LetnaNarocilnica, @MamicaDo3Leta, @MaticnaStevilka, @Mesto, @NacinProdaje, @Naziv, @Nerezident, @NeUporabljaj, @NeUpostevajZaIOP, @NoceUPenzijo, @ObcinaBivanja, @Obrazec, @OdjavljenIzZZZS, @OdprtPri, @OmejitevNeplacano, @OmejitevZapadlo, @OmogociPlaciloZDobavnico, @Opombe, @OpozoriloZaRacun, @OpozoriUporabnik, @OpozoriZapadlo, @OsebnaIzkaznica, @Otroci, @OZNAKA, @Partner, @Partner1, @PE, @PlacilniRok, @PlacilniRokNaOdpremo, @Pogodba, @PogodbaOPoslovodenju, @Poklic, @Popust, @Posta, @PostaZacasnegaBivalisca, @PotniList, @PotniListDatum, @PotniListDo, @PotniListOd, @PovecanaDobaProcent, @PovecanaSplosnaOlajsava, @PravniStatus, @PrenesenoIzPOSa, @PreostaliDopust, @PRIIMEK, @PrijavljenNaZZZS, @RabatGeneralno, @RabatnaSkupina, @Rojen, @RojenVKraju, @Sifra, @SifraDrzave, @SifraDrzaveNaslova, @SifraPojavnegaStatusa, @SKIS, @Sklic, @Skupina, @Spol, @Sprememba, @Stalnost, @StalnostTrenutno, @StevilkaOsebnegaDokumenta, @StevilkaRacuna, @Stimulac, @StopnjaIzobrazbe, @SuperRabat, @Telefon, @Telefon2, @TempCena1, @TempCena2, @TempCena3, @TezavnostDela, @TKDIS, @Ulica, @VarnostPriDelu, @VarnostPriDeluST, @VarnostPriDeluVeljaDO, @VarnostPriDeluVeljaOD, @Viza, @VizaDatum, @VizaDO, @VizaOD, @VIzvrsbi, @VIzvrsbiOd, @Vnasalec, @VnesenoNaPOSu, @Vrsta, @VrstaHonorarja, @VrstaIzplacila, @VrstaNaslova, @VrstaOsebe, @VrstaOsebnegaDokumenta, @VrstaPoslaZBS, @VrstaUre, @VrstaZaposlitve, @VzdrzevaniOdrasli, @ZacasnoBivalisce, @Zaposlen, @ZdravstveniPregled, @ZdravstveniPregledST, @ZdravstveniPregledVeljaDO, @ZdravstveniPregledVeljaOD, @Ziro_Racun, @Ziro_Racun1, @Ziro_Racun2, @ZnizanjeTakse, @AlterTelefon, @MladiDo30, @PogodbaOPoslovodenju2014_18Clen, @SP1LetoOprostitev30, @SP1LetoOprostitev50, @SP1OdMinimalne2014, '" + database.partnerYearCode + "') " + nl);
+            sb.Append("select		ident_current('[" + database.biroDavcnaStevilka + "].[dbo].[Partner]') as [RecNo] ");
 
             return sb.ToString();
         }
@@ -325,7 +325,7 @@ namespace Tests.data.accessors
             StringBuilder sb = new StringBuilder();
             string nl = Environment.NewLine;
 
-            sb.Append("update	[" + database.BiroDb + "].[dbo].[Partner]" + nl);
+            sb.Append("update	[" + database.biroDavcnaStevilka + "].[dbo].[Partner]" + nl);
             sb.Append("set " + nl);
             sb.Append("			[AlternativnaImena] = @AlternativnaImena, " + nl);
             sb.Append("			[BarkodaeSLOG] = @BarkodaeSLOG, " + nl);
@@ -509,7 +509,7 @@ namespace Tests.data.accessors
             sb.Append("			[SP1LetoOprostitev30] = @SP1LetoOprostitev30, " + nl);
             sb.Append("			[SP1LetoOprostitev50] = @SP1LetoOprostitev50, " + nl);
             sb.Append("			[SP1OdMinimalne2014] = @SP1OdMinimalne2014 " + nl);
-            sb.Append("where	[YearCode] = '" + database.BiroCd + "' " + nl);
+            sb.Append("where	[YearCode] = '" + database.partnerYearCode + "' " + nl);
             sb.Append("				and [RecNo] = @RecNo ");
             sb.Append("if (@@rowcount > 0)	select @RecNo as [RecNo] " + nl);
             sb.Append("else					select 0 as [RecNo] ");

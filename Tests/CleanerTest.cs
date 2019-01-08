@@ -50,7 +50,7 @@ namespace Tests
         {
             birokrat.DeleteAllTestRecords(company_year);
             biroside.DeleteAllTestRecords(company_year);
-            string[] oznake = birokrat.AddTestRecordsToDatabase(company_year);
+            string[] oznake = birokrat.AddTestRecordsToDatabase(company_year, "Avansni Racun");
 
             client.SetProcessAutomaticSwitch(false);
             client.SetUnlockedThreshold(180);

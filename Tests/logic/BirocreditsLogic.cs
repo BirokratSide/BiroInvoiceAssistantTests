@@ -6,7 +6,7 @@ using Tests.data.structs;
 
 namespace Tests.logic
 {
-    public class BirocreditsLogic : IBirotestLogic
+    public class BirocreditsLogic : IBirocreditsLogic
     {
 
         CBirokrat birokrat;

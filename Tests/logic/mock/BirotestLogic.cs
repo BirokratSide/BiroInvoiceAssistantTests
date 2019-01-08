@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Tests.logic
 {
-    class BirotestLogic : IBirotestLogic
+    class BirotestLogic : IBirocreditsLogic
     {
 
         BiroInvoiceAssistantTestingOnlyContext context;

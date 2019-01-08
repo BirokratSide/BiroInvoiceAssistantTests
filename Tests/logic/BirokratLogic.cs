@@ -37,10 +37,10 @@ namespace Tests.logic
 
         }
         #region [public]
-        public string[] AddTestRecordsToDatabase(string company_year)
+        public string[] AddTestRecordsToDatabase(string company_year, string tipPoste)
         {
             // returns the Oznake of added test cases
-            return InsertNewTestCasesToDatabaseKPAndSlike(company_year);
+            return InsertNewTestCasesToDatabaseKPAndSlike(company_year, tipPoste);
         }
 
         public void AddHardcodedTestCase(string company_year) {
@@ -83,7 +83,7 @@ namespace Tests.logic
                 birokrat.Slike.Delete(slk);
         }
 
-        private string[] InsertNewTestCasesToDatabaseKPAndSlike(string company_year)
+        private string[] InsertNewTestCasesToDatabaseKPAndSlike(string company_year, string TipPoste)
         {
             string directory = Configuration.GetValue<string>("HappyPathInputDirectory");
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
@@ -93,8 +93,8 @@ namespace Tests.logic
             string[] oznake = new string[num_recs];
             for (int i = 0; i < num_recs; i++)
             {
-                string date = DateTime.Now.ToString("ddMMyy") + "0000";
-                oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, company_year, fileArray[i]);
+                string date = DateTime.Now.ToString("yyyyMMdd") + "0000";
+                oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, company_year, fileArray[i], TipPoste);
             }
             return oznake;
         }

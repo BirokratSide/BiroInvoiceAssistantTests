@@ -8,13 +8,17 @@ namespace Tests.data
     {
 
         public ISqlConnection sqlConnection;
-        public string BiroDb;
-        public string BiroCd;
+        public string biroDavcnaStevilka;
+        public string partnerYearCode;
+        public string optionsYearCode;
+        public string companyYearCode;
 
-        public CDatabase(ISqlConnection conn, string birocd, string birodb) {
+        public CDatabase(ISqlConnection conn, string partnerYearCode, string optionsYearCode, string companyYearCode, string biroDavcnaStevilka) {
             sqlConnection = conn;
-            BiroCd = birocd;
-            BiroDb = birodb;
+            this.partnerYearCode = partnerYearCode;
+            this.optionsYearCode = optionsYearCode;
+            this.biroDavcnaStevilka = biroDavcnaStevilka;
+            this.companyYearCode = companyYearCode;
         }
     }
 }

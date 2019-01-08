@@ -21,16 +21,18 @@ namespace Tests.logic
             short zap_st = 1;
             string year_code = "some";
             string file_path = @"C:/Users/kiki/Desktop/racuni/andre-leston.pdf";
-            AddTestCaseToDatabase(datum_vnosa, zap_st, year_code, file_path);
+            AddTestCaseToDatabase(datum_vnosa, zap_st, year_code, file_path, "Avansni Racun");
         }
 
-        public string AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path) {
+        public string AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path, string tipposte) {
             // want to add a new test case - my rachuns from airbnb
 
             SPostnaKnjiga pk = new SPostnaKnjiga();
+            pk.Datum = DateTime.Now;
             pk.DatumVnosa = datum_vnosa;
             pk.ZapSt = zap_st;
             pk.YearCode = year_code;
+            pk.TipPoste = tipposte;
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             byte[] arr = File.ReadAllBytes(file_path);
