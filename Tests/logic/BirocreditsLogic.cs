@@ -49,11 +49,11 @@ namespace Tests.logic
             birokrat.Partner.Save(partner);
         }
 
-        public void InsertOpcija(string sifra, bool rih, string rihd, float rihk, float rihz, int rihc, string rihp)
+        public void InsertOpcija(string sifra, string rih, string rihd, float rihk, float rihz, int rihc, string rihp)
         {
             // insert all of these options for the specified partner
             SCRMStrankeOpcije opcija;
-            opcija = GetOpcija(sifra, "RIH", rih.ToString());
+            opcija = GetOpcija(sifra, "RIH", rih);
             birokrat.CrmStrankeOpcije.Save(opcija);
             opcija = GetOpcija(sifra, "RIHD", rihd);
             birokrat.CrmStrankeOpcije.Save(opcija);
