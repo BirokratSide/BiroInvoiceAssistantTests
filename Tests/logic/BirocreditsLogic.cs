@@ -70,6 +70,7 @@ namespace Tests.logic
         private SCRMStrankeOpcije GetOpcija(string sifra, string opcijaName, string vrednost)
         {
             SCRMStrankeOpcije opcija = new SCRMStrankeOpcije();
+            opcija.Aktivno = -1;
             opcija.Sifra = sifra;
             opcija.Aplikacija = "RIH";
             opcija.Opcija = opcijaName;

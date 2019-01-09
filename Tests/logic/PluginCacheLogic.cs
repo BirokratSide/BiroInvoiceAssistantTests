@@ -45,6 +45,7 @@ namespace Tests.logic
         public void DeleteAllRecords()
         {
             biromaster.PluginCache.RemoveRange(biromaster.PluginCache);
+            biromaster.SaveChanges();
         }
     }
 }
