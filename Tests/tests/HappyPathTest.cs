@@ -16,70 +16,49 @@ using Tests.data.structs;
 using Tests.entity_framework;
 using System.Collections.Generic;
 
-namespace Tests
+
+namespace Tests.tests
 {
-    public class CleanerTest
+    public class HappyPathTest : MetaTest
     {
+        public HappyPathTest() : base() {}
 
-        IConfiguration Configuration;
-
-        BIAHostClient client;
-        BirokratLogic birokrat;
-        BirosideLogic biroside;
-
-        string company_id;
-        string company_year;
-        int user_id;
-
-        public CleanerTest()
+        public new void Start()
         {
-            var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile(StaticConst.SETTINGS_PATH);
-            Configuration = builder.Build();
-
-            client = new BIAHostClient();
-            birokrat = new BirokratLogic();
-            biroside = new BirosideLogic();
-            company_id = Configuration.GetValue<string>("Database:company_id");
-            company_year = Configuration.GetValue<string>("Database:company_year");
-            user_id = 5;
-        }
-
-        public void Start()
-        {
-            birokrat.DeleteAllTestRecords(company_year);
-            biroside.DeleteAllTestRecords(company_year);
+            base.Start();
+            
+            // add slike, kp to database
             string[] oznake = birokrat.AddTestRecordsToDatabase(company_year, "Avansni Racun");
 
-            client.SetProcessAutomaticSwitch(false);
-            client.SetUnlockedThreshold(180);
+            // add credits, partner to database
+            birotest.InsertPartner("1", company_id);
+            birotest.InsertOpcija("1", true, "2018-06-07 12:00:00", 5.20f, 5.10f, 0, "");
 
-            StartRecordsHost(oznake);
+            // add to plugin cache
+            pluginCacheLogic.SaveRecord(null);
 
-            Thread.Sleep(60 * 1000);
 
-            StartRecordsHost(oznake);
-
-            // now verify that half the records get cleaned and half don't
+            // add test records to knjiga poste and slike
+            
         }
 
+        
+
         #region [private]
-        private void StartRecordsHost(string[] oznake)
-        {
+        private void StartRecordsHost(string[] oznake) {
 
             List<SSlike> data = birokrat.GetAllSlike(company_year);
             for (int i = 0; i < oznake.Length; i++)
             {
+                Thread.Sleep(5000);
                 SSlike slk = data.Where((x) => (x.Oznaka == oznake[i])).ToArray()[0];
-
-                StartingRecord record = new StartingRecord(company_id, company_year, slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
+                
+                StartingRecord record = new StartingRecord(company_id.Substring(4), company_year, slk.Oznaka, slk.RecNo.ToString(), slk.DatumVnosa);
                 HttpResponseMessage msg = client.Start(record);
             }
         }
 
-        private void AssertAllRecordsProcessed(string[] oznake)
-        {
+        private void AssertAllRecordsProcessed(string[] oznake) {
             foreach (string oznaka in oznake)
             {
                 entity_framework.InvoiceBuffer bufferRecord = biroside.biroside.InvoiceBuffer.Where((x) => (x.Oznaka == oznaka)).ToArray()[0];
@@ -105,9 +84,7 @@ namespace Tests
             if (rec.LockedBy != null && rec.LockedTime != null)
             {
                 Console.WriteLine("AssertLocked: Passed");
-            }
-            else
-            {
+            } else {
                 throw new Exception("LockedBy or LockedTime were null during AssertLocked!");
             }
             return rec;
@@ -130,12 +107,9 @@ namespace Tests
             string Oznaka = rec.Oznaka;
 
             entity_framework.InvoiceBuffer[] array = biroside.biroside.InvoiceBuffer.Where((x) => (x.Oznaka == Oznaka)).ToArray();
-            if (array.Length == 0)
-            {
+            if (array.Length == 0) {
                 Console.WriteLine("AssertFinished-DeleteInvoiceBufferRecord: PASSED");
-            }
-            else
-            {
+            } else {
                 throw new Exception("The invoice buffer was not deleted on finish!!!");
             }
 

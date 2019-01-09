@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 
 using Common.utils;
-using Tests;
+using Tests.tests;
 
 namespace SystemTests
 {
