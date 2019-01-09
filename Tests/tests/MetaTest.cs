@@ -13,9 +13,9 @@ namespace Tests.tests
         protected IConfiguration Configuration;
 
         protected BIAHostClient client;
-        protected BirokratLogic birokrat;
+        protected BirokratLogic customerDatabase;
         protected BirosideLogic biroside;
-        protected IBirocreditsLogic birotest;
+        protected IBirocreditsLogic creditsDatabase;
         protected PluginCacheLogic pluginCacheLogic;
 
         protected string customer_company_id;
@@ -31,11 +31,14 @@ namespace Tests.tests
             .AddJsonFile(StaticConst.SETTINGS_PATH);
             Configuration = builder.Build();
 
+            // 2nd level objects
             client = new BIAHostClient();
-            birokrat = new BirokratLogic();
+            customerDatabase = new BirokratLogic();
             biroside = new BirosideLogic();
-            birotest = new BirocreditsLogic();
+            creditsDatabase = new BirocreditsLogic();
             pluginCacheLogic = new PluginCacheLogic();
+
+            // configuration
             customer_company_id = Configuration.GetValue<string>("CustomerDatabase:company_id");
             customer_company_year = Configuration.GetValue<string>("CustomerDatabase:company_year");
             options_company_year = Configuration.GetValue<string>("CreditsDatabase:options_company_year");
@@ -45,14 +48,15 @@ namespace Tests.tests
 
         protected virtual void Start() {
             WipeDatabaseClean();
+            creditsDatabase.InsertPartner(partner_sifra, customer_company_id);
         }
 
         protected void WipeDatabaseClean()
         {
             // delete records from all databases
-            birokrat.DeleteAllTestRecords(customer_company_year);
+            customerDatabase.DeleteAllTestRecords(customer_company_year);
             biroside.DeleteAllTestRecords(customer_company_year);
-            birotest.DeleteAllRecordsFromDatabase();
+            creditsDatabase.DeleteAllRecordsFromDatabase();
             pluginCacheLogic.DeleteAllRecords();
         }
     }

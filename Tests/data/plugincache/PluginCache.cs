@@ -3,8 +3,15 @@ using System.Collections.Generic;
 
 namespace Tests.data.plugincache
 {
+    
     public partial class PluginCache
     {
+
+        #region [constants]
+        public const string TYPE_SLIKE = "slike";
+        public const string TYPE_CRMSTRANKEOPCIJE = "crmstrankeopcije";
+        #endregion
+
         public int Id { get; set; }
         public string Type { get; set; }
         public string Davcnastevilka { get; set; }

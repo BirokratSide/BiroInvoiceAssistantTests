@@ -24,7 +24,7 @@ namespace Tests.logic
             AddTestCaseToDatabase(datum_vnosa, zap_st, year_code, file_path, "Avansni Racun");
         }
 
-        public string AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path, string tipposte) {
+        public SSlike AddTestCaseToDatabase(string datum_vnosa, short zap_st, string year_code, string file_path, string tipposte) {
             // want to add a new test case - my rachuns from airbnb
 
             SPostnaKnjiga pk = new SPostnaKnjiga();
@@ -49,7 +49,13 @@ namespace Tests.logic
 
             birokrat.PostnaKnjiga.Save(pk);
             birokrat.Slike.Save(s);
-            return s.Oznaka;
+            SListRequest lrq = new SListRequest();
+            List<SSlike> slklst = birokrat.Slike.List(lrq).data;
+            foreach (var x in slklst) {
+                if (x.Oznaka == s.Oznaka)
+                    return x;
+            }
+            return null;
         }
     }
 }

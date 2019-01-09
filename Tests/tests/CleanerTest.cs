@@ -50,16 +50,16 @@ namespace Tests.tests
         {
             birokrat.DeleteAllTestRecords(company_year);
             biroside.DeleteAllTestRecords(company_year);
-            string[] oznake = birokrat.AddTestRecordsToDatabase(company_year, "Avansni Racun");
+            SSlike[] oznake = birokrat.AddTestRecordsToDatabase(company_year, "Avansni Racun");
 
             client.SetProcessAutomaticSwitch(false);
             client.SetUnlockedThreshold(180);
 
-            StartRecordsHost(oznake);
+            StartRecordsHost(new string[1]);
 
             Thread.Sleep(60 * 1000);
 
-            StartRecordsHost(oznake);
+            StartRecordsHost(new string[1]);
 
             // now verify that half the records get cleaned and half don't
         }

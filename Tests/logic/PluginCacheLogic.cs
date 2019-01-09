@@ -23,8 +23,21 @@ namespace Tests.logic
             biromaster = new biromasterContext();
         }
 
-        public void SaveRecord(PluginCache rec)
+        
+        public void SaveRecord(string type, string davcnastevilka, string companyyear, string oznaka, string recno)
         {
+            PluginCache rec = new PluginCache
+            {
+                Type = type,
+                Davcnastevilka = davcnastevilka, // without biro
+                Companyyear = companyyear,
+                Oznaka = oznaka,
+                Datumvnosa = "",
+                Toprocess = true,
+                Processed = false,
+                Recno = recno
+            };
+
             biromaster.PluginCache.Add(rec);
             biromaster.SaveChanges();
         }

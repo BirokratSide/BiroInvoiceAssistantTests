@@ -37,7 +37,7 @@ namespace Tests.logic
 
         }
         #region [public]
-        public string[] AddTestRecordsToDatabase(string company_year, string tipPoste)
+        public SSlike[] AddTestRecordsToDatabase(string company_year, string tipPoste)
         {
             // returns the Oznake of added test cases
             return InsertNewTestCasesToDatabaseKPAndSlike(company_year, tipPoste);
@@ -83,20 +83,20 @@ namespace Tests.logic
                 birokrat.Slike.Delete(slk);
         }
 
-        private string[] InsertNewTestCasesToDatabaseKPAndSlike(string company_year, string TipPoste)
+        private SSlike[] InsertNewTestCasesToDatabaseKPAndSlike(string company_year, string TipPoste)
         {
             string directory = Configuration.GetValue<string>("Testing:PicturesDirectory");
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
 
             // add new records into the database
             int num_recs = Configuration.GetValue<int>("Testing:NumCases");
-            string[] oznake = new string[num_recs];
+            SSlike[] slike = new SSlike[num_recs];
             for (int i = 0; i < num_recs; i++)
             {
-                string date = DateTime.Now.ToString("yyyyMMdd") + "0000";
-                oznake[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, company_year, fileArray[i], TipPoste);
+                string date = DateTime.Now.ToString("yyyyMMdd");
+                slike[i] = TestCaseAdder.AddTestCaseToDatabase(date, (short)i, company_year, fileArray[i], TipPoste);
             }
-            return oznake;
+            return slike;
         }
         #endregion
     }
