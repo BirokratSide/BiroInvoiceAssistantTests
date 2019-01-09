@@ -43,7 +43,7 @@ namespace Tests.logic
             return InsertNewTestCasesToDatabaseKPAndSlike(company_year, tipPoste);
         }
 
-        public void AddHardcodedTestCase(string company_year) {
+        public void AddHardcodedTestCase() {
             TestCaseAdder.HardcodedCase();
         }
 
@@ -85,7 +85,7 @@ namespace Tests.logic
 
         private string[] InsertNewTestCasesToDatabaseKPAndSlike(string company_year, string TipPoste)
         {
-            string directory = Configuration.GetValue<string>("HappyPathInputDirectory");
+            string directory = Configuration.GetValue<string>("Testing:PicturesDirectory");
             string[] fileArray = Directory.GetFiles(directory, "*.pdf");
 
             // add new records into the database

@@ -30,29 +30,20 @@ namespace Tests.entity_framework
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(StaticConst.SETTINGS_PATH);
             Configuration = builder.Build();
-
-            // Database init
-            SBAzureSettings config = new SBAzureSettings(
-                Configuration.GetValue<string>("Database:Username"),
-                Configuration.GetValue<string>("Database:Password"),
-                Configuration.GetValue<string>("Database:Address"),
-                Configuration.GetValue<string>("Database:InitialCatalog"),
-                Configuration.GetValue<bool>("Database:IntegratedSecurity"),
-                Configuration.GetValue<string>("Database:Database"));
-
-            if (!Configuration.GetValue<bool>("Database:IntegratedSecurity"))
+            
+            if (!Configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"))
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
-                                                 Configuration.GetValue<string>("Database:Address"),
-                                                 Configuration.GetValue<string>("Database:Database"),
-                                                 Configuration.GetValue<string>("Database:Username"),
-                                                 Configuration.GetValue<string>("Database:Password"));
+                                                 Configuration.GetValue<string>("DatabaseConnection:Address"),
+                                                 "biroside",
+                                                 Configuration.GetValue<string>("DatabaseConnection:Username"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Password"));
             }
             else
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=true",
                                                  Configuration.GetValue<string>("Database:Address"),
-                                                 Configuration.GetValue<string>("Database:Database"));
+                                                 "biroside");
             }
         }
 

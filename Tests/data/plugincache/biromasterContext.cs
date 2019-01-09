@@ -14,11 +14,13 @@ namespace Tests.data.plugincache
 
         public biromasterContext()
         {
+            LoadFromSettings();
         }
 
         public biromasterContext(DbContextOptions<biromasterContext> options)
             : base(options)
         {
+            LoadFromSettings();
         }
 
         IConfiguration Configuration;
@@ -32,18 +34,18 @@ namespace Tests.data.plugincache
             .AddJsonFile(StaticConst.SETTINGS_PATH);
             Configuration = builder.Build();
             
-            if (!Configuration.GetValue<bool>("Database:IntegratedSecurity"))
+            if (!Configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"))
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
-                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Address"),
                                                  "biromaster",
-                                                 Configuration.GetValue<string>("Database:Username"),
-                                                 Configuration.GetValue<string>("Database:Password"));
+                                                 Configuration.GetValue<string>("DatabaseConnection:Username"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Password"));
             }
             else
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=true",
-                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Address"),
                                                  "biromaster");
             }
         }

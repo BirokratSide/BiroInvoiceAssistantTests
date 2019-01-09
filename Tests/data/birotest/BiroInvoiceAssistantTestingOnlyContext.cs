@@ -32,25 +32,25 @@ namespace Tests.birotest
 
             // Database init
             SBAzureSettings config = new SBAzureSettings(
-                Configuration.GetValue<string>("Database:Username"),
-                Configuration.GetValue<string>("Database:Password"),
-                Configuration.GetValue<string>("Database:Address"),
-                Configuration.GetValue<string>("Database:InitialCatalog"),
-                Configuration.GetValue<bool>("Database:IntegratedSecurity"),
-                Configuration.GetValue<string>("Database:Database"));
+                Configuration.GetValue<string>("DatabaseConnection:Username"),
+                Configuration.GetValue<string>("DatabaseConnection:Password"),
+                Configuration.GetValue<string>("DatabaseConnection:Address"),
+                Configuration.GetValue<string>("DatabaseConnection:InitialCatalog"),
+                Configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"),
+                Configuration.GetValue<string>("DatabaseConnection:Database"));
 
-            if (!Configuration.GetValue<bool>("Database:IntegratedSecurity"))
+            if (!Configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"))
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=false;User={2};Password={3}",
-                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Address"),
                                                  "BiroInvoiceAssistantTestingOnly",
-                                                 Configuration.GetValue<string>("Database:Username"),
-                                                 Configuration.GetValue<string>("Database:Password"));
+                                                 Configuration.GetValue<string>("DatabaseConnection:Username"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Password"));
             }
             else
             {
                 ConnectionString = String.Format("Server={0};Database={1};Trusted_Connection=true",
-                                                 Configuration.GetValue<string>("Database:Address"),
+                                                 Configuration.GetValue<string>("DatabaseConnection:Address"),
                                                  "BiroInvoiceAssistantTestingOnly");
             }
         }

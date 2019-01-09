@@ -22,7 +22,4 @@
   <ItemGroup>
     <Compile Remove="PostnaKnjigaAccessor.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="data\plugincache\" />
-  </ItemGroup>
 </Project>

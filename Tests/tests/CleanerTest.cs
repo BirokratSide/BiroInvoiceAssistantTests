@@ -41,8 +41,8 @@ namespace Tests.tests
             client = new BIAHostClient();
             birokrat = new BirokratLogic();
             biroside = new BirosideLogic();
-            company_id = Configuration.GetValue<string>("Database:company_id");
-            company_year = Configuration.GetValue<string>("Database:company_year");
+            company_id = Configuration.GetValue<string>("CustomerDatabase:company_id");
+            company_year = Configuration.GetValue<string>("CustomerDatabase:company_year");
             user_id = 5;
         }
 

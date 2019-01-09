@@ -72,30 +72,24 @@ namespace Tests.data
             .AddJsonFile(@"C:\Users\kiki\Desktop\playground\BiroInvoiceAssistantTests\Tests\appsettings.json");
             Configuration = builder.Build();
 
-            string configname = "Database";
-            if (credits) configname = "CreditsDatabase";
 
-            // host
-            string user = Configuration.GetValue<string>(String.Format("{0}:Username", configname));
-            string pass = Configuration.GetValue<string>(String.Format("{0}:Password", configname));
-            string address = Configuration.GetValue<string>(String.Format("{0}:Address", configname));
-            string database = Configuration.GetValue<string>("Database:Database");
-            string intSec = Configuration.GetValue<string>(String.Format("{0}:IntegratedSecurity", configname));
-            string initCat =  Configuration.GetValue<string>("Database:InitialCatalog");
+            string type = "CustomerDatabase";
+            if (credits) type = "CreditsDatabase";
 
             CMsSqlConnectionString sqlstring = new CMsSqlConnectionString();
-            sqlstring.username = Configuration.GetValue<string>(String.Format("{0}:Username", configname));
-            sqlstring.password = Configuration.GetValue<string>(String.Format("{0}:Password", configname));
-            sqlstring.server = Configuration.GetValue<string>(String.Format("{0}:Address", configname));
-            sqlstring.database = Configuration.GetValue<string>("Database:Database");
-            sqlstring.integratedSecurity = Configuration.GetValue<bool>("Database:IntegratedSecurity");
+            sqlstring.username = Configuration.GetValue<string>("DatabaseConnection:Username");
+            sqlstring.password = Configuration.GetValue<string>("DatabaseConnection:Password");
+            sqlstring.server = Configuration.GetValue<string>("DatabaseConnection:Address");
+            sqlstring.integratedSecurity = Configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity");
+            sqlstring.database = Configuration.GetValue<string>(String.Format("{0}:Database", type));
+
             CMsSqlConnection conn = new CMsSqlConnection((ISqlConnectionString)sqlstring);
             conn.autoOpenClose = true;
 
-            string partner_company_year = Configuration.GetValue<string>(String.Format("{0}:partner_company_year", configname));
-            string options_company_year = Configuration.GetValue<string>(String.Format("{0}:options_company_year", configname));
-            string company_year_code = Configuration.GetValue<string>(String.Format("Database:company_year", configname));
-            string biroDb = Configuration.GetValue<string>(String.Format("{0}:company_id", configname));
+            string partner_company_year = Configuration.GetValue<string>("CreditsDatabase:partner_company_year");
+            string options_company_year = Configuration.GetValue<string>("CreditsDatabase:options_company_year");
+            string company_year_code = Configuration.GetValue<string>("CustomerDatabase:company_year");
+            string biroDb = Configuration.GetValue<string>(String.Format("{0}:company_id", type));
             this.database = new CDatabase(conn, partner_company_year, options_company_year, company_year_code, biroDb);
             
         }

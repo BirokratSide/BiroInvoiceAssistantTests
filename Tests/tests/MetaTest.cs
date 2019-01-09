@@ -18,11 +18,11 @@ namespace Tests.tests
         protected IBirocreditsLogic birotest;
         protected PluginCacheLogic pluginCacheLogic;
 
-        protected string company_id;
+        protected string customer_company_id;
         protected string options_company_year;
         protected string partner_company_year;
-        protected string company_year;
-        protected int user_id;
+        protected string customer_company_year;
+        protected string partner_sifra;
 
         public MetaTest()
         {
@@ -36,11 +36,11 @@ namespace Tests.tests
             biroside = new BirosideLogic();
             birotest = new BirocreditsLogic();
             pluginCacheLogic = new PluginCacheLogic();
-            company_id = Configuration.GetValue<string>("Database:company_id");
-            company_year = Configuration.GetValue<string>("Database:company_year");
+            customer_company_id = Configuration.GetValue<string>("CustomerDatabase:company_id");
+            customer_company_year = Configuration.GetValue<string>("CustomerDatabase:company_year");
             options_company_year = Configuration.GetValue<string>("CreditsDatabase:options_company_year");
             partner_company_year = Configuration.GetValue<string>("CreditsDatabase:partner_company_year");
-            user_id = 5;
+            partner_sifra = Configuration.GetValue<string>("CustomerDatabase:partner_sifra");
         }
 
         protected virtual void Start() {
@@ -50,8 +50,8 @@ namespace Tests.tests
         protected void WipeDatabaseClean()
         {
             // delete records from all databases
-            birokrat.DeleteAllTestRecords(company_year);
-            biroside.DeleteAllTestRecords(company_year);
+            birokrat.DeleteAllTestRecords(customer_company_year);
+            biroside.DeleteAllTestRecords(customer_company_year);
             birotest.DeleteAllRecordsFromDatabase();
             pluginCacheLogic.DeleteAllRecords();
         }
