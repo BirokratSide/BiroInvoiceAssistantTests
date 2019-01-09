@@ -43,12 +43,12 @@ namespace Tests.tests
             customer_company_year = Configuration.GetValue<string>("CustomerDatabase:company_year");
             options_company_year = Configuration.GetValue<string>("CreditsDatabase:options_company_year");
             partner_company_year = Configuration.GetValue<string>("CreditsDatabase:partner_company_year");
-            partner_sifra = Configuration.GetValue<string>("CustomerDatabase:partner_sifra");
+            partner_sifra = Configuration.GetValue<string>("CreditsDatabase:partner_sifra");
         }
 
         protected virtual void Start() {
             WipeDatabaseClean();
-            creditsDatabase.InsertPartner(partner_sifra, customer_company_id);
+            creditsDatabase.InsertPartner(partner_sifra, customer_company_id.Substring(4));
         }
 
         protected void WipeDatabaseClean()
@@ -56,7 +56,7 @@ namespace Tests.tests
             // delete records from all databases
             customerDatabase.DeleteAllTestRecords(customer_company_year);
             biroside.DeleteAllTestRecords(customer_company_year);
-            creditsDatabase.DeleteAllRecordsFromDatabase();
+            creditsDatabase.DeleteAllRecordsFromDatabase(partner_sifra);
             pluginCacheLogic.DeleteAllRecords();
         }
     }

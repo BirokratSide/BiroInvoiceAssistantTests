@@ -15,7 +15,7 @@ namespace Tests.logic
             birokrat = new CBirokrat(true);
         }
 
-        public void DeleteAllRecordsFromDatabase()
+        public void DeleteAllRecordsFromDatabase(string sifra)
         {
             // could be dangerous to delete partners so we'll just delete CRMStrankeOpcije where Aplication = 'RIH'
             Dictionary<string, string> WhereClauses = new Dictionary<string, string>();
@@ -24,6 +24,12 @@ namespace Tests.logic
             foreach (SCRMStrankeOpcije opcija in lst) {
                 birokrat.CrmStrankeOpcije.Delete(opcija);
             }
+
+            WhereClauses = new Dictionary<string, string>();
+            WhereClauses["Sifra"] = sifra;
+            List<SPartner> me = birokrat.Partner.List(new data.structs.SListRequest(), WhereClauses).data;
+            foreach (SPartner p in me)
+                if (!birokrat.Partner.Delete(p)) Console.WriteLine("PARTNER NOT DELETED PROBLEM");
         }
 
         public void InsertPartner(string sifra, string davcnaStevilka)

@@ -283,7 +283,8 @@ namespace Tests.data.accessors
 
             sb.Append("select " + nl);
             sb.Append("			[Sifra], " + nl);
-            sb.Append("			[YearCode] " + nl);
+            sb.Append("			[YearCode], " + nl);
+            sb.Append("         [RecNo] " + nl);
             sb.Append("from		[" + database.biroDavcnaStevilka + "].[dbo].[Partner] " + nl);
             sb.Append("where	[YearCode] = '" + database.partnerYearCode + "' " + nl);
 

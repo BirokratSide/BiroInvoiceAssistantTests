@@ -8,6 +8,6 @@ namespace Tests.logic
     {
         void InsertOpcija(string sifra, bool rih, string rihd, float rihk, float rihz, int rihc, string rihp);
         void InsertPartner(string sifra, string davcnaStevilka);
-        void DeleteAllRecordsFromDatabase();
+        void DeleteAllRecordsFromDatabase(string sifra);
     }
 }

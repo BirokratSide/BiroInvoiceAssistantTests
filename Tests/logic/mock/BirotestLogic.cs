@@ -17,7 +17,7 @@ namespace Tests.logic
             context = new BiroInvoiceAssistantTestingOnlyContext();
         }
 
-        public void DeleteAllRecordsFromDatabase() {
+        public void DeleteAllRecordsFromDatabase(string sifra) {
             Partner[] arrp = context.Partner.Where((x) => (int.Parse(x.Sifra) > -1)).ToArray();
             context.Partner.RemoveRange(arrp);
 
