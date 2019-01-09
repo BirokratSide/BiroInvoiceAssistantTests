@@ -11,11 +11,11 @@ namespace SystemTests
     {
         static void Main(string[] args)
         {
-            HappyPathTest tst = new HappyPathTest();
-            tst.Start();
-
-            //CleanerTest tst = new CleanerTest();
+            //HappyPathTest tst = new HappyPathTest();
             //tst.Start();
+
+            SadPathTest tst = new SadPathTest();
+            tst.Start();
         }
     }
 }
